@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: my-amigurumi
+    env: node
+    plan: free
+    buildCommand: cd server && npm install && npm run build
+    startCommand: node index.js
+    envVars:
+      - key: NODE_VERSION
+        value: 22.16.0
+    rootDir: server
