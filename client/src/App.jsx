@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import logoFinal from './assets/Logo final.png';
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -8,27 +9,55 @@ function App() {
 
   return (
     <>
+      <>
+        <img src={logoFinal} alt="Logo do site" className="logo-final" />
+        <p className="slogan">Os melhores amigurumis pertinho de você</p>
 
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+        <div className="menu-top">
+          <button>Galeria</button>
+          <button>Agenda</button>
+          <button>Contato</button>
+        </div>
+
+        <div className="pedido-box">
+        <label htmlFor="vagas">Vagas de encomendas</label>
+        <input
+          id="vagas"
+          type="number"
+          className="vagas-input"
+          placeholder="0"
+        />
+        </div>
+      </>
+      <div className="galeria-container">
+  <h2>Galeria</h2>
+  <div className="galeria-grid">
+    <div className="produto-card">
+      <img src="/img/amigurumi1.jpg" alt="Amigurumi 1" />
+      <p className="nome-produto">Boneca Amarela</p>
+      <p className="preco-produto">R$ 45,00</p>
+    </div>
+    <div className="produto-card">
+      <img src="/img/amigurumi2.jpg" alt="Amigurumi 2" />
+      <p className="nome-produto">Boneca Lilás</p>
+      <p className="preco-produto">R$ 50,00</p>
+    </div>
+    {/* Adicione mais produtos aqui */}
+  </div>
+</div>
+      
+      <div className="contato-section">
+  <h2>Contatos</h2>
+  <div className="link-inputs">
+    <input type="text" placeholder="Link do Instagram" />
+    <input type="text" placeholder="Link do WhatsApp" />
+    <input type="text" placeholder="Link do Site" />
+  </div>
+
+  <div className="contato-footer">
+    <p>Insira aqui seus dados de contato ou uma mensagem para o visitante</p>
+  </div>
+</div>
     </>
   )
 }
