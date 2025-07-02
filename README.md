@@ -1,46 +1,18 @@
 # My Amigurumi
 
-Esse é um projeto para a cadeira de Projeto de Interfaces WEB, na UFC de Quixadá, divido em duas partes:
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
+![Firebase](https://img.shields.io/badge/firebase-a08021?style=for-the-badge&logo=firebase&logoColor=ffcd34)
 
-* Backend, usando NodeJS
-* Frontend, usando ReactJS
+Esse é um projeto para a cadeira de Projeto de Interfaces WEB e Projeto Integrado 3.
 
-## ⚡ Rodando o servidor
+## ⚡ Rodando a aplicação
 
- **1.** Na pasta raiz, entre na pasta do servidor:
+ **1.** Coloque o arquivo `.env.local` na raiz
 
-```shell
-cd server
-```
-
- **2.** Instale as dependências do Node.js:
-
-```shell
-npm install
-```
-
- **3.** Builde o Frontend:
-
-```shell
-npm run build
-```
-
- **4.** Após isso, rode o servidor:
-
-```shell
-npm run start
-```
-
- **5.** Para acessar o site, abra o navegador e entre no endereço:
-* `http://localhost:10000/`
-
-## 🖌️ Rodando o Frontend
-
- **1.** Entre na pasta:
-
-```shell
-cd client
-```
+> [!NOTE] Nota
+> Este arquivo deve possuir as chaves de configuração do Firebase.
 
  **2.** Instale as dependências:
 
