@@ -1,4 +1,4 @@
-import logoFinal from "./assets/Logo final.png";
+import logoFinal from "./assets/logo.svg";
 import "./App.css";
 import NavBar from "./components/NavBar";
 

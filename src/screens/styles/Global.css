@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Hepta+Slab:wght@1..900&display=swap');
+
+* {
+    font-family: "Hepta Slab", serif;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(to bottom, #F3F9FF, #B2DBFF);
+    /* branco para azul claro */
+    min-height: 100vh;
+    font-family: sans-serif;
+}
