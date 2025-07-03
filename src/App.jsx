@@ -17,9 +17,11 @@ export default function App() {
           <Route path="/login" element={<Login />} />
 
           {/* Rota protegida para o painel de administração */}
-          <Route path="/admin" element={<PrivateRoute />}>
-            <Route path="/admin" element={<AdminPanel />} />
-          </Route>
+          <Route path="/admin" element={
+            <PrivateRoute>
+              <AdminPanel />
+            </PrivateRoute>
+          } />
 
           {/* Rota para lidar com caminhos não encontrados */}
           <Route path="*" element={<h1>404 - Página não encontrada</h1>} />
