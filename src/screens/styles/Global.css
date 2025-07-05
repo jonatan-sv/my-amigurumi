@@ -1,3 +1,8 @@
+/*
+*  Aqui ficam os estilos que se aplicam para TODAS AS PÁGINAS.
+*  Se quiser estilizar algo específico de uma página, crie um CSS separado.
+*/
+
 @import url('https://fonts.googleapis.com/css2?family=Hepta+Slab:wght@1..900&display=swap');
 
 * {
@@ -7,7 +12,5 @@
 body {
     margin: 0;
     background: linear-gradient(to bottom, #F3F9FF, #B2DBFF);
-    /* branco para azul claro */
     min-height: 100vh;
-    font-family: sans-serif;
 }
