@@ -1,3 +1,4 @@
+import "./screens/styles/Global.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router";
 import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./screens/PrivateRoute";
