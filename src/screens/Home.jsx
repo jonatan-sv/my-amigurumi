@@ -58,6 +58,7 @@ export default function Home() {
           position: "fixed",
           left: "50%",
           transform: "translateX(-50%)",
+          zIndex: 2
         }}
       >
         <nav style={{ display: "flex", gap: "30px", justifyContent: "center" }}>
@@ -107,7 +108,7 @@ export default function Home() {
       <img
         src="/logo.png"
         alt="Logo My Amigurumi"
-        style={{ width: "100px", display: "block", margin: "0 auto", position: "fixed", left: "550px"}}
+        style={{ width: "100px", display: "block", margin: "0 auto", position: "fixed", left: "25%", zIndex: 2}}
       />
       {/* Seção: Galeria */}
       <section
@@ -148,6 +149,7 @@ export default function Home() {
                 background: "#fff",
                 scrollSnapAlign: "start",
                 position: "relative",
+                zIndex: 1
               }}
             >
               <button
