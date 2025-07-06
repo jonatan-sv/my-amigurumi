@@ -55,6 +55,9 @@ export default function Home() {
           boxShadow: "6px 6px 0px #3d0066",
           marginBottom: "20px",
           fontFamily: "Arial",
+          position: "fixed",
+          left: "50%",
+          transform: "translateX(-50%)",
         }}
       >
         <nav style={{ display: "flex", gap: "30px", justifyContent: "center" }}>
@@ -104,12 +107,12 @@ export default function Home() {
       <img
         src="/logo.png"
         alt="Logo My Amigurumi"
-        style={{ width: "180px", display: "block", margin: "0 auto" }}
+        style={{ width: "100px", display: "block", margin: "0 auto", position: "fixed", left: "550px"}}
       />
       {/* Seção: Galeria */}
       <section
         id="galeria"
-        style={{ marginTop: "40px", padding: "20px", background: "#f3e8ff" }}
+        style={{ marginTop: "100px", padding: "20px", background: "#f3e8ff" }}
       >
         <div
           style={{
@@ -161,7 +164,7 @@ export default function Home() {
                 }}
                 title="Remover produto"
               >
-                🗑️
+                <img src="/lixinho.svg"/>
               </button>
 
               <img src={produto.imagem} alt={produto.nome} width="150" />
@@ -177,6 +180,7 @@ export default function Home() {
                   textAlign: "center",
                   border: "none",
                   borderBottom: "1px solid #ccc",
+                  width: "80%"
                 }}
               />
               <input
@@ -190,6 +194,7 @@ export default function Home() {
                   textAlign: "center",
                   border: "none",
                   borderBottom: "1px solid #ccc",
+                  width: "50%"
                 }}
               />
             </div>
@@ -290,8 +295,17 @@ export default function Home() {
         >
           Instagram
         </a>
-        <h1>Teste</h1>
+        <footer style={{backgroundColor: "white",  boxShadow: "0 0 0 10px #C9B4EF"}}> 
+          <p style={{fontSize: "20px"}}>My Amigurumi</p>
+          <p style={{fontSize: "15px"}}>Mariana Lima</p>
+          <img
+          src="/logo.png"
+          style={{ width: "100px"}}
+      />
+        </footer>
       </section>
     </div>
   );
 }
+
+//C9B4EF
