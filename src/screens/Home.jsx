@@ -43,6 +43,8 @@ export default function Home() {
     instagram: "https://instagram.com/seuperfil",
   });
 
+  const [numero, setNumero] = useState(0);
+
   return (
     <div style={{ textAlign: "center", padding: "20px" }}>
       {/* Barra de Navegação */}
@@ -104,12 +106,78 @@ export default function Home() {
           </a>
         </nav>
       </div>
+      
       {/* Logo */}
-      <img
-        src="/logo.png"
-        alt="Logo My Amigurumi"
-        style={{ width: "100px", display: "block", margin: "0 auto", position: "fixed", left: "25%", zIndex: 2}}
-      />
+      <div style={{ 
+        position: "relative", 
+        marginTop: "100px", 
+        display: "flex", 
+        alignItems: "center", 
+        justifyContent: "left", 
+        gap: "40px", 
+        marginLeft: "20px",
+      }}>
+        <img
+          src="/logo.png"
+          alt="Logo My Amigurumi"
+          style={{ width: "200px", display: "block", zIndex: 2 }}
+        />
+        <h1 style={{ zIndex: 2, margin: 0 }}>
+          Os melhores amigurumis pertinho de você!
+        </h1>
+      </div>
+      {/* /* Seção: Vagas de Encomendas */}
+      <section
+        style={{
+          margin: "60px",
+          padding: "20px",
+        }}
+      >
+        <h1>Vagas de encomenda</h1>
+        <section
+          style={{
+            margin: "40px auto 0 auto",
+            maxWidth: "200px",
+            background: "#D0B3D7",
+            borderRadius: "20px",
+            boxShadow: "0px 0px 0px 5px #390B46",
+            padding: "20px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <label
+            htmlFor="meuNumero"
+            style={{
+              fontWeight: "bold",
+              marginRight: "10px",
+              marginBottom: "10px",
+              textAlign: "center",
+            }}
+          >
+          </label>
+          <input
+            id="meuNumero"
+            type="number"
+            min={0}
+            max={100}
+            value={numero}
+            onChange={e => setNumero(Number(e.target.value))}
+            style={{
+              width: "100px",
+              height: "80px",
+              fontSize: "50px",
+              padding: "5px",
+              display: "block",
+              margin: "0 auto",
+              textAlign: "center",
+              borderRadius: "10px",
+              position: "flex",
+            }}
+          />
+        </section>
+      </section>
       {/* Seção: Galeria */}
       <section
         id="galeria"
@@ -291,23 +359,52 @@ export default function Home() {
         </a>{" "}
         | <a href="mailto:email@email.com">Email</a> |{" "}
         <a
-          href="https://instagram.com/seuperfil"
+          href="https://instagram.com/myamigurumi_S2"
           target="_blank"
           rel="noreferrer"
         >
           Instagram
         </a>
-        <footer style={{backgroundColor: "white",  boxShadow: "0 0 0 10px #C9B4EF"}}> 
-          <p style={{fontSize: "20px"}}>My Amigurumi</p>
-          <p style={{fontSize: "15px"}}>Mariana Lima</p>
+        <footer
+          style={{
+            backgroundColor: "white",
+            boxShadow: "0 0 0 10px #C9B4EF",
+            display: "flex",
+            alignItems: "center",
+            gap: "650px",
+            marginTop: "30px",
+            padding: "20px",
+            borderRadius: "20px",
+          }}
+        >
           <img
-          src="/logo.png"
-          style={{ width: "100px"}}
-      />
+            src="/logo.png"
+            style={{ width: "100px", alignContent: "left", padding: "0 20px" }}
+            alt="Logo My Amigurumi"
+          />
+          <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+            <p style={{ fontSize: "23px", margin: 0 }}>My Amigurumi</p>
+            <p style={{ fontSize: "17px", margin: 0 }}>Mariana Lima</p>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+            Siga-me em:
+            <div style={{gap: "10px", display: "flex", marginTop: "10px"}}>
+              <img src="/bsky-icon"/>
+              <img src="/tiktok-icon"/>
+              <a
+                href="https://instagram.com/myamigurumi_S2"
+                target="_blank"
+                rel="noreferrer"
+                style={{ display: "inline-block" }}
+              >
+                <img src="/icon-insta"/>
+              </a>
+            </div>
+          </div>
         </footer>
       </section>
     </div>
   );
 }
 
-//C9B4EF
+//<input type="button" onclick="alert('Hello World!')" value="Click Me!">
