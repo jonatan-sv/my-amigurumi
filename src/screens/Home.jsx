@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { AiFillTikTok } from "react-icons/ai";
+import { FaBluesky, FaInstagram } from "react-icons/fa6";
+import { TbTrashXFilled } from "react-icons/tb";
 
 export default function Home() {
   const [produtos, setProdutos] = useState([
@@ -113,7 +116,7 @@ export default function Home() {
                 fontSize: "18px",
                 color: "#cc0000",
               }}>
-                <img src="/lixinho.svg" />
+                <TbTrashXFilled />
               </button>
 
               <img src={produto.imagem} alt={produto.nome} width="150" />
@@ -312,9 +315,9 @@ export default function Home() {
         </div>
 
         <div style={{ fontSize: "18px", marginBottom: "20px" }}>
-          <a href={contatos.bluesky} target="_blank" rel="noreferrer" style={{ margin: "0 10px" }}>Bluesky</a> |
-          <a href={contatos.instagram} target="_blank" rel="noreferrer" style={{ margin: "0 10px" }}>Instagram</a> |
-          <a href={contatos.tiktok} target="_blank" rel="noreferrer" style={{ margin: "0 10px" }}>TikTok</a>
+          <a href={contatos.bluesky} target="_blank" rel="noreferrer" style={{ margin: "0 10px", borderRight: "1px solid black", padding: "8px 10px 0px 0px" }}><FaBluesky size={22} color="black" /></a>
+          <a href={contatos.instagram} target="_blank" rel="noreferrer"><FaInstagram size={24} color="black" /></a>
+          <a href={contatos.tiktok} target="_blank" rel="noreferrer" style={{ margin: "0 10px", borderLeft: "1px solid black", padding: "8px 10px 0px 8px" }}><AiFillTikTok size={24} color="black" /></a>
         </div>
 
         <footer style={{ backgroundColor: "white", boxShadow: "0 0 0 10px #C9B4EF", padding: "10px" }}>
