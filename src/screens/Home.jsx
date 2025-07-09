@@ -5,8 +5,8 @@ import { TbTrashXFilled } from "react-icons/tb";
 
 export default function Home() {
   const [produtos, setProdutos] = useState([
-    { nome: "Boneca Amarela", preco: "R$ 80,00", imagem: "/produtos/boneca.jpg" },
-    { nome: "Gatinho Roxo", preco: "R$ 60,00", imagem: "/produtos/gatinho.jpg" },
+    { nome: "Boneca Amarela", preco: 80.00, imagem: "/produtos/boneca.jpg", desconto: 0, hidden: true },
+    { nome: "Gatinho Roxo", preco: 60.00, imagem: "/produtos/gatinho.jpg", desconto: 0, hidden: true },
   ]);
 
   const [novoProduto, setNovoProduto] = useState({
@@ -26,7 +26,7 @@ export default function Home() {
   const adicionarProduto = () => {
     if (!novoProduto.nome || !novoProduto.preco || !novoProduto.imagem) return;
     setProdutos([...produtos, novoProduto]);
-    setNovoProduto({ nome: "", preco: "", imagem: "" });
+    setNovoProduto({ nome: "", preco: 0, imagem: "", desconto: 0, hidden: true });
   };
 
   const handleChangeProduto = (index, campo, valor) => {
@@ -39,6 +39,21 @@ export default function Home() {
     const novaLista = produtos.filter((_, i) => i !== index);
     setProdutos(novaLista);
   };
+
+  const ativarDesconto = (index) => {
+    const atualizados = [...produtos];
+    atualizados[index].hidden = !atualizados[index].hidden;
+    setProdutos(atualizados);
+  }
+
+  const aplicarDesconto = (index, preco) => {
+    const atualizados = [...produtos];
+    atualizados[index].desconto = preco;
+    setProdutos(atualizados);
+    ativarDesconto(index);
+  }
+
+
 
   return (
     <div style={{ textAlign: "center", padding: "150px 20px 20px" }}>
@@ -133,18 +148,92 @@ export default function Home() {
                   width: "80%",
                 }}
               />
-              <input
-                value={produto.preco}
-                onChange={(e) => handleChangeProduto(index, "preco", e.target.value)}
-                style={{
-                  fontSize: "14px",
-                  marginTop: "5px",
-                  textAlign: "center",
-                  border: "none",
-                  borderBottom: "1px solid #ccc",
-                  width: "50%",
-                }}
-              />
+              <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
+                  <div>
+                    R$
+                  <input
+                    value={produto.preco}
+                    onChange={(e) => handleChangeProduto(index, "preco", e.target.value)}
+                    onKeyDown={(e) => {
+                      if (
+                        ["Backspace", "Delete", "Tab", "Escape", "Enter", "ArrowLeft", "ArrowRight", ",", "."].includes(e.key)
+                      ) {
+                        return;
+                      }
+
+                      if (!/^[0-9]$/.test(e.key)) {
+                        e.preventDefault();
+                      }
+                    }}
+                    style={{
+                      fontSize: "14px",
+                      marginTop: "5px",
+                      textAlign: "center",
+                      border: "none",
+                      borderBottom: "1px solid #ccc",
+                      width: "50%",
+                    }}
+                    />
+                  </div>
+                  <button 
+                    onClick={() => ativarDesconto(index)}
+                    style={{
+                      fontSize: "14px",
+                      marginTop: "5px",
+                      textAlign: "center",
+                      border: "none",
+                      background: "#3d0066",
+                      color: "#fff",
+                      padding: "5px 10px",
+                      borderRadius: "5px",
+                      cursor: "pointer",
+                      display: produto.hidden ? "block" : "none",
+                  }}>
+                    Adicionar Desconto
+                  </button>
+                  <input
+                    onChange={(e) => handleChangeProduto(index, "desconto", e.target.value)}
+                    onKeyDown={(e) => {
+                      if (
+                        ["Backspace", "Delete", "Tab", "Escape", "Enter", "ArrowLeft", "ArrowRight", ",", "."].includes(e.key)
+                      ) {
+                        return;
+                      }
+                      if (!/^[0-9]$/.test(e.key)) {
+                        e.preventDefault();
+                      }
+                    }}
+                    value={produto.desconto}
+                    style={{
+                      fontSize: "14px",
+                      marginTop: "5px",
+                      textAlign: "center",
+                      border: "none",
+                      borderBottom: "1px solid #ccc",
+                      width: "50%",
+                      display: produto.hidden ? "none" : "block",
+                    }}
+                    />
+                    <button 
+                      onClick={() => aplicarDesconto(index, produto.desconto)}
+                      style={{
+                        fontSize: "14px",
+                        marginTop: "5px",
+                        textAlign: "center",
+                        border: "none",
+                        background: "#3d0066",
+                        color: "#fff",
+                        padding: "5px 10px",
+                        borderRadius: "5px",
+                        cursor: "pointer",
+                        display: produto.hidden ? "none" : "block",
+                    }}>
+                      Aplicar Desconto
+                    </button>
+                    <div style={{ fontSize: "14px", marginTop: "10px", textAlign: "center" }}>
+                      O desconto atual é de {((produto.desconto * 100) / produto.preco).toFixed(2)}%
+                    </div>
+                  </div>
             </div>
           ))}
         </div>
