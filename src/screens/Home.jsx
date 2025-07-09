@@ -87,7 +87,7 @@ export default function Home() {
 
       {/* Logo */}
       <img
-        src="/logo.png"
+        src="/logo.svg"
         alt="Logo My Amigurumi"
         style={{ width: "100px", position: "absolute", left: "5%", top: "2%", zIndex: 1 }}
       />
@@ -432,7 +432,7 @@ export default function Home() {
         <footer style={{ backgroundColor: "white", boxShadow: "0 0 0 10px #C9B4EF", padding: "10px" }}>
           <p style={{ fontSize: "20px", margin: 0 }}>My Amigurumi</p>
           <p style={{ fontSize: "15px", margin: 0 }}>Mariana Lima</p>
-          <img src="/logo.png" style={{ width: "100px" }} alt="Logo rodapé" />
+          <img src="/logo.svg" style={{ width: "100px" }} alt="Logo rodapé" />
         </footer>
       </section>
     </div>
