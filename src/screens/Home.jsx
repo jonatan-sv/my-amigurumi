@@ -5,8 +5,20 @@ import { TbTrashXFilled } from "react-icons/tb";
 
 export default function Home() {
   const [produtos, setProdutos] = useState([
-    { nome: "Boneca Amarela", preco: 80.00, imagem: "/produtos/boneca.jpg", desconto: 0, hidden: true },
-    { nome: "Gatinho Roxo", preco: 60.00, imagem: "/produtos/gatinho.jpg", desconto: 0, hidden: true },
+    {
+      nome: "Boneca Amarela",
+      preco: 80.0,
+      imagem: "/produtos/boneca.jpg",
+      desconto: 0,
+      hidden: true,
+    },
+    {
+      nome: "Gatinho Roxo",
+      preco: 60.0,
+      imagem: "/produtos/gatinho.jpg",
+      desconto: 0,
+      hidden: true,
+    },
   ]);
 
   const [novoProduto, setNovoProduto] = useState({
@@ -26,7 +38,13 @@ export default function Home() {
   const adicionarProduto = () => {
     if (!novoProduto.nome || !novoProduto.preco || !novoProduto.imagem) return;
     setProdutos([...produtos, novoProduto]);
-    setNovoProduto({ nome: "", preco: 0, imagem: "", desconto: 0, hidden: true });
+    setNovoProduto({
+      nome: "",
+      preco: 0,
+      imagem: "",
+      desconto: 0,
+      hidden: true,
+    });
   };
 
   const handleChangeProduto = (index, campo, valor) => {
@@ -44,7 +62,7 @@ export default function Home() {
     const atualizados = [...produtos];
     atualizados[index].hidden = !atualizados[index].hidden;
     setProdutos(atualizados);
-  }
+  };
 
   const aplicarDesconto = (index, preco) => {
     const atualizados = [...produtos];
@@ -55,9 +73,7 @@ export default function Home() {
     }
     setProdutos(atualizados);
     ativarDesconto(index);
-  }
-
-
+  };
 
   return (
     <div style={{ textAlign: "center", padding: "150px 20px 20px" }}>
@@ -78,10 +94,46 @@ export default function Home() {
         }}
       >
         <nav style={{ display: "flex", gap: "30px", justifyContent: "center" }}>
-          <a href="#galeria" style={{ textDecoration: "none", color: "#3d0066", fontWeight: "bold" }}>Galeria</a>
-          <a href="#adicionar" style={{ textDecoration: "none", color: "#3d0066", fontWeight: "bold" }}>Adicionar Produtos</a>
-          <a href="#agenda" style={{ textDecoration: "none", color: "#3d0066", fontWeight: "bold" }}>Agenda</a>
-          <a href="#contato" style={{ textDecoration: "none", color: "#3d0066", fontWeight: "bold" }}>Contato</a>
+          <a
+            href="#galeria"
+            style={{
+              textDecoration: "none",
+              color: "#3d0066",
+              fontWeight: "bold",
+            }}
+          >
+            Galeria
+          </a>
+          <a
+            href="#adicionar"
+            style={{
+              textDecoration: "none",
+              color: "#3d0066",
+              fontWeight: "bold",
+            }}
+          >
+            Adicionar Produtos
+          </a>
+          <a
+            href="#agenda"
+            style={{
+              textDecoration: "none",
+              color: "#3d0066",
+              fontWeight: "bold",
+            }}
+          >
+            Agenda
+          </a>
+          <a
+            href="#contato"
+            style={{
+              textDecoration: "none",
+              color: "#3d0066",
+              fontWeight: "bold",
+            }}
+          >
+            Contato
+          </a>
         </nav>
       </div>
 
@@ -89,59 +141,77 @@ export default function Home() {
       <img
         src="/logo.png"
         alt="Logo My Amigurumi"
-        style={{ width: "100px", position: "absolute", left: "5%", top: "2%", zIndex: 1 }}
+        style={{
+          width: "100px",
+          position: "absolute",
+          left: "5%",
+          top: "2%",
+          zIndex: 1,
+        }}
       />
 
       {/* Galeria */}
       <section id="galeria" style={{ padding: "20px", background: "#f3e8ff" }}>
-        <div style={{
-          backgroundColor: "white",
-          display: "inline-block",
-          padding: "10px 30px",
-          borderRadius: "40px",
-          boxShadow: "6px 6px 0px #3d0066",
-          marginBottom: "20px",
-          fontFamily: "Arial",
-        }}>
+        <div
+          style={{
+            backgroundColor: "white",
+            display: "inline-block",
+            padding: "10px 30px",
+            borderRadius: "40px",
+            boxShadow: "6px 6px 0px #3d0066",
+            marginBottom: "20px",
+            fontFamily: "Arial",
+          }}
+        >
           <h2 style={{ margin: 0, color: "#3d0066" }}>Galeria</h2>
         </div>
 
-        <div style={{
-          display: "flex",
-          overflowX: "auto",
-          gap: "20px",
-          padding: "10px",
-          scrollSnapType: "x mandatory",
-        }}>
+        <div
+          style={{
+            display: "flex",
+            overflowX: "auto",
+            gap: "20px",
+            padding: "10px",
+            scrollSnapType: "x mandatory",
+          }}
+        >
           {produtos.map((produto, index) => (
-            <div key={index} style={{
-              flex: "0 0 auto",
-              border: "1px solid #ccc",
-              borderRadius: "10px",
-              padding: "10px",
-              width: "200px",
-              background: "#fff",
-              scrollSnapAlign: "start",
-              position: "relative",
-              zIndex: 1,
-            }}>
-              <button onClick={() => removerProduto(index)} style={{
-                position: "absolute",
-                top: "5px",
-                right: "5px",
-                background: "transparent",
-                border: "none",
-                cursor: "pointer",
-                fontSize: "18px",
-                color: "#cc0000",
-              }}>
+            <div
+              key={index}
+              style={{
+                flex: "0 0 auto",
+                border: "1px solid #ccc",
+                borderRadius: "10px",
+                padding: "10px",
+                width: "200px",
+                background: "#fff",
+                scrollSnapAlign: "start",
+                position: "relative",
+                zIndex: 1,
+              }}
+            >
+              <button
+                onClick={() => removerProduto(index)}
+                style={{
+                  position: "absolute",
+                  top: "5px",
+                  right: "5px",
+                  background: "transparent",
+                  border: "none",
+                  cursor: "pointer",
+                  fontSize: "18px",
+                  color: "#cc0000",
+                }}
+              >
                 <TbTrashXFilled />
               </button>
 
               <img src={produto.imagem} alt={produto.nome} width="150" />
               <input
                 value={produto.nome}
-                onChange={(e) => handleChangeProduto(index, "nome", e.target.value)}
+                onChange={(e) =>
+                  handleChangeProduto(index, "nome", e.target.value)
+                }
                 style={{
                   fontWeight: "bold",
                   fontSize: "16px",
@@ -152,11 +222,24 @@ export default function Home() {
                   width: "80%",
                 }}
               />
-              <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "column",
+                }}
+              >
                 <div>
                   {produto.desconto && Number(produto.desconto) > 0 ? (
                     <>
-                      <span style={{ textDecoration: "line-through", color: "red", marginRight: 8 }}>
+                      <span
+                        style={{
+                          textDecoration: "line-through",
+                          color: "red",
+                          marginRight: 8,
+                        }}
+                      >
                         R$ {Number(produto.preco).toFixed(2)}
                       </span>
                       <span style={{ color: "green", fontWeight: "bold" }}>
@@ -168,10 +251,22 @@ export default function Home() {
                       R$
                       <input
                         value={produto.preco}
-                        onChange={(e) => handleChangeProduto(index, "preco", e.target.value)}
+                        onChange={(e) =>
+                          handleChangeProduto(index, "preco", e.target.value)
+                        }
                         onKeyDown={(e) => {
                           if (
-                            ["Backspace", "Delete", "Tab", "Escape", "Enter", "ArrowLeft", "ArrowRight", ",", "."].includes(e.key)
+                            [
+                              "Backspace",
+                              "Delete",
+                              "Tab",
+                              "Escape",
+                              "Enter",
+                              "ArrowLeft",
+                              "ArrowRight",
+                              ",",
+                              ".",
+                            ].includes(e.key)
                           ) {
                             return;
                           }
@@ -209,10 +304,22 @@ export default function Home() {
                   Adicionar Desconto
                 </button>
                 <input
-                  onChange={(e) => handleChangeProduto(index, "desconto", e.target.value)}
+                  onChange={(e) =>
+                    handleChangeProduto(index, "desconto", e.target.value)
+                  }
                   onKeyDown={(e) => {
                     if (
-                      ["Backspace", "Delete", "Tab", "Escape", "Enter", "ArrowLeft", "ArrowRight", ",", "."].includes(e.key)
+                      [
+                        "Backspace",
+                        "Delete",
+                        "Tab",
+                        "Escape",
+                        "Enter",
+                        "ArrowLeft",
+                        "ArrowRight",
+                        ",",
+                        ".",
+                      ].includes(e.key)
                     ) {
                       return;
                     }
@@ -249,8 +356,19 @@ export default function Home() {
                   Aplicar Desconto
                 </button>
                 {produto.desconto && Number(produto.desconto) > 0 && (
-                  <div style={{ fontSize: "14px", marginTop: "10px", textAlign: "center" }}>
-                    O desconto atual é de {((1 - Number(produto.desconto) / Number(produto.preco)) * 100).toFixed(2)}%
+                  <div
+                    style={{
+                      fontSize: "14px",
+                      marginTop: "10px",
+                      textAlign: "center",
+                    }}
+                  >
+                    O desconto atual é de{" "}
+                    {(
+                      (1 - Number(produto.desconto) / Number(produto.preco)) *
+                      100
+                    ).toFixed(2)}
+                    %
                   </div>
                 )}
               </div>
@@ -261,15 +379,17 @@ export default function Home() {
 
       {/* Adicionar Produtos */}
       <section id="adicionar" style={{ marginTop: "60px" }}>
-        <div style={{
-          backgroundColor: "white",
-          display: "inline-block",
-          padding: "10px 30px",
-          borderRadius: "40px",
-          boxShadow: "6px 6px 0px #3d0066",
-          marginBottom: "20px",
-          fontFamily: "Arial",
-        }}>
+        <div
+          style={{
+            backgroundColor: "white",
+            display: "inline-block",
+            padding: "10px 30px",
+            borderRadius: "40px",
+            boxShadow: "6px 6px 0px #3d0066",
+            marginBottom: "20px",
+            fontFamily: "Arial",
+          }}
+        >
           <h2 style={{ margin: 0, color: "#3d0066" }}>Adicionar Produtos</h2>
         </div>
 
@@ -278,21 +398,27 @@ export default function Home() {
             type="text"
             placeholder="Nome do produto"
             value={novoProduto.nome}
-            onChange={(e) => setNovoProduto({ ...novoProduto, nome: e.target.value })}
+            onChange={(e) =>
+              setNovoProduto({ ...novoProduto, nome: e.target.value })
+            }
             style={{ margin: "5px" }}
           />
           <input
             type="text"
             placeholder="Preço"
             value={novoProduto.preco}
-            onChange={(e) => setNovoProduto({ ...novoProduto, preco: e.target.value })}
+            onChange={(e) =>
+              setNovoProduto({ ...novoProduto, preco: e.target.value })
+            }
             style={{ margin: "5px" }}
           />
           <input
             type="text"
             placeholder="URL da imagem"
             value={novoProduto.imagem}
-            onChange={(e) => setNovoProduto({ ...novoProduto, imagem: e.target.value })}
+            onChange={(e) =>
+              setNovoProduto({ ...novoProduto, imagem: e.target.value })
+            }
             style={{ margin: "5px" }}
           />
           <button onClick={adicionarProduto} style={{ marginLeft: "10px" }}>
@@ -303,33 +429,52 @@ export default function Home() {
 
       {/* Agenda */}
       <section id="agenda" style={{ marginTop: "60px" }}>
-        <div style={{
-          backgroundColor: "white",
-          display: "inline-block",
-          padding: "10px 30px",
-          borderRadius: "40px",
-          boxShadow: "6px 6px 0px #3d0066",
-          marginBottom: "20px",
-          fontFamily: "Arial",
-        }}>
+        <div
+          style={{
+            backgroundColor: "white",
+            display: "inline-block",
+            padding: "10px 30px",
+            borderRadius: "40px",
+            boxShadow: "6px 6px 0px #3d0066",
+            marginBottom: "20px",
+            fontFamily: "Arial",
+          }}
+        >
           <h2 style={{ margin: 0, color: "#3d0066" }}>Agenda</h2>
         </div>
 
-        <div style={{
-          backgroundColor: "#f3e8ff",
-          padding: "20px",
-          margin: "20px auto",
-          borderRadius: "12px",
-          maxWidth: "400px",
-          boxShadow: "4px 4px 0 #a56be6",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center"
-        }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", justifyContent: "center" }}>
+        <div
+          style={{
+            backgroundColor: "#f3e8ff",
+            padding: "20px",
+            margin: "20px auto",
+            borderRadius: "12px",
+            maxWidth: "400px",
+            boxShadow: "4px 4px 0 #a56be6",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              justifyContent: "center",
+            }}
+          >
             <button
               onClick={() => setEncomendas((prev) => Math.max(0, prev - 1))}
-              style={{ fontSize: "20px", padding: "5px 15px", borderRadius: "10px", backgroundColor: "#3d0066", color: "white", border: "none", cursor: "pointer" }}
+              style={{
+                fontSize: "20px",
+                padding: "5px 15px",
+                borderRadius: "10px",
+                backgroundColor: "#3d0066",
+                color: "white",
+                border: "none",
+                cursor: "pointer",
+              }}
             >
               −
             </button>
@@ -349,51 +494,70 @@ export default function Home() {
                 fontSize: "20px",
                 border: "1px solid #ccc",
                 borderRadius: "8px",
-                padding: "5px"
+                padding: "5px",
               }}
             />
             <button
               onClick={() => setEncomendas((prev) => prev + 1)}
-              style={{ fontSize: "20px", padding: "5px 15px", borderRadius: "10px", backgroundColor: "#3d0066", color: "white", border: "none", cursor: "pointer" }}
+              style={{
+                fontSize: "20px",
+                padding: "5px 15px",
+                borderRadius: "10px",
+                backgroundColor: "#3d0066",
+                color: "white",
+                border: "none",
+                cursor: "pointer",
+              }}
             >
               +
             </button>
           </div>
-          <p style={{ marginTop: "10px", fontWeight: "bold", fontSize: "18px", color: "#3d0066" }}>
+          <p
+            style={{
+              marginTop: "10px",
+              fontWeight: "bold",
+              fontSize: "18px",
+              color: "#3d0066",
+            }}
+          >
             {encomendas === 0 ? "Encomendas fechadas" : "Encomendas abertas"}
           </p>
         </div>
 
-        <div style={{
-          backgroundColor: "#d6b4ff",
-          height: "400px",
-          width: "90%",
-          maxWidth: "700px",
-          margin: "0 auto",
-          borderRadius: "15px",
-          boxShadow: "4px 4px 0 #3d0066",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontFamily: "Arial",
-          fontSize: "18px",
-          color: "#3d0066"
-        }}>
+        <div
+          style={{
+            backgroundColor: "#d6b4ff",
+            height: "400px",
+            width: "90%",
+            maxWidth: "700px",
+            margin: "0 auto",
+            borderRadius: "15px",
+            boxShadow: "4px 4px 0 #3d0066",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontFamily: "Arial",
+            fontSize: "18px",
+            color: "#3d0066",
+          }}
+        >
           Área para Google Calendar (em breve)
         </div>
       </section>
 
       {/* Contato */}
       <section id="contato" style={{ marginTop: "60px", padding: "20px" }}>
-        <div style={{
-          backgroundColor: "white",
-          display: "inline-block",
-          padding: "10px 30px",
-          borderRadius: "40px",
-          boxShadow: "6px 6px 0px #3d0066",
-          marginBottom: "20px",
-          fontFamily: "Arial",
-        }}>
+        <div
+          style={{
+            backgroundColor: "white",
+            display: "inline-block",
+            padding: "10px 30px",
+            borderRadius: "40px",
+            boxShadow: "6px 6px 0px #3d0066",
+            marginBottom: "20px",
+            fontFamily: "Arial",
+          }}
+        >
           <h2 style={{ margin: 0, color: "#3d0066" }}>Contato</h2>
         </div>
 
@@ -401,7 +565,9 @@ export default function Home() {
           <input
             type="text"
             value={contatos.bluesky}
-            onChange={(e) => setContatos({ ...contatos, bluesky: e.target.value })}
+            onChange={(e) =>
+              setContatos({ ...contatos, bluesky: e.target.value })
+            }
             placeholder="Link do Bluesky"
             style={{ margin: "5px", width: "300px" }}
           />
@@ -409,7 +575,9 @@ export default function Home() {
           <input
             type="text"
             value={contatos.instagram}
-            onChange={(e) => setContatos({ ...contatos, instagram: e.target.value })}
+            onChange={(e) =>
+              setContatos({ ...contatos, instagram: e.target.value })
+            }
             placeholder="Link do Instagram"
             style={{ margin: "5px", width: "300px" }}
           />
@@ -417,19 +585,51 @@ export default function Home() {
           <input
             type="text"
             value={contatos.tiktok}
-            onChange={(e) => setContatos({ ...contatos, tiktok: e.target.value })}
+            onChange={(e) =>
+              setContatos({ ...contatos, tiktok: e.target.value })
+            }
             placeholder="Link do TikTok"
             style={{ margin: "5px", width: "300px" }}
           />
         </div>
 
         <div style={{ fontSize: "18px", marginBottom: "20px" }}>
-          <a href={contatos.bluesky} target="_blank" rel="noreferrer" style={{ margin: "0 10px", borderRight: "1px solid black", padding: "8px 10px 0px 0px" }}><FaBluesky size={22} color="black" /></a>
-          <a href={contatos.instagram} target="_blank" rel="noreferrer"><FaInstagram size={24} color="black" /></a>
-          <a href={contatos.tiktok} target="_blank" rel="noreferrer" style={{ margin: "0 10px", borderLeft: "1px solid black", padding: "8px 10px 0px 8px" }}><AiFillTikTok size={24} color="black" /></a>
+          <a
+            href={contatos.bluesky}
+            target="_blank"
+            rel="noreferrer"
+            style={{
+              margin: "0 10px",
+              borderRight: "1px solid black",
+              padding: "8px 10px 0px 0px",
+            }}
+          >
+            <FaBluesky size={22} color="black" />
+          </a>
+          <a href={contatos.instagram} target="_blank" rel="noreferrer">
+            <FaInstagram size={24} color="black" />
+          </a>
+          <a
+            href={contatos.tiktok}
+            target="_blank"
+            rel="noreferrer"
+            style={{
+              margin: "0 10px",
+              borderLeft: "1px solid black",
+              padding: "8px 10px 0px 8px",
+            }}
+          >
+            <AiFillTikTok size={24} color="black" />
+          </a>
         </div>
 
-        <footer style={{ backgroundColor: "white", boxShadow: "0 0 0 10px #C9B4EF", padding: "10px" }}>
+        <footer
+          style={{
+            backgroundColor: "white",
+            boxShadow: "0 0 0 10px #C9B4EF",
+            padding: "10px",
+          }}
+        >
           <p style={{ fontSize: "20px", margin: 0 }}>My Amigurumi</p>
           <p style={{ fontSize: "15px", margin: 0 }}>Mariana Lima</p>
           <img src="/logo.png" style={{ width: "100px" }} alt="Logo rodapé" />
