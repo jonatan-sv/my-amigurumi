@@ -90,7 +90,7 @@ export default function Home() {
           position: "fixed",
           left: "50%",
           transform: "translateX(-50%)",
-          top: "0",
+          top: "10px",
           zIndex: 2,
         }}
       >
