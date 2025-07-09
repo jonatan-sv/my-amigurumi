@@ -532,16 +532,23 @@ export default function Home() {
             maxWidth: "700px",
             margin: "0 auto",
             borderRadius: "15px",
+            padding: "10px",
             boxShadow: "4px 4px 0 #3d0066",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontFamily: "Arial",
-            fontSize: "18px",
             color: "#3d0066",
           }}
         >
-          Área para Google Calendar (em breve)
+          <iframe
+            src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=America%2FFortaleza&showPrint=0&showCalendars=0&title=Agenda%20de%20Eventos&src=ZWNiYTE5OTFlODVmZjE2MWNiNTRjZjVkYmRlYzQyM2YwNTM1NzkxYmUwNWNkNTM2ODljZGFkMTQ2YzNiYmVmNEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23b39ddb"
+            width="100%"
+            height="100%"
+            style={{
+              border: "none",
+              borderRadius: "10px",
+            }}
+          ></iframe>
         </div>
       </section>
 
