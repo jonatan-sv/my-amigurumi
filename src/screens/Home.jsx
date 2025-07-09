@@ -194,11 +194,11 @@ export default function Home() {
         {/* corações 4 */}
         <FaHeart
           size={30}
-          style={{ position: "absolute", top: 1250, right: 535, rotate: "5deg"}}
+          style={{ position: "absolute", top: 1250, right: 525, rotate: "5deg"}}
         />
         <FaHeart
           size={20}
-          style={{ position: "absolute", top: 1220, right: 525, rotate: "-5deg"}}
+          style={{ position: "absolute", top: 1220, right: 515, rotate: "-5deg"}}
         />
       </div>
 
