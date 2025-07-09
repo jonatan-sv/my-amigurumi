@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { AiFillTikTok } from "react-icons/ai";
 import { FaBluesky, FaInstagram } from "react-icons/fa6";
 import { TbTrashXFilled } from "react-icons/tb";
+import { FaHeart } from "react-icons/fa6";
 
 export default function Home() {
   const [produtos, setProdutos] = useState([
@@ -149,6 +150,58 @@ export default function Home() {
           zIndex: 1,
         }}
       />
+
+      {/* Corações */}
+      <div>
+          {/*corações 1*/}
+        <FaHeart
+          size={30}
+          style={{ position: "absolute", top: 160, left: 20, rotate: "5deg"}}
+        />
+        {/* top +30 do coração 2 */}
+        <FaHeart
+          size={20}
+          style={{ position: "absolute", top: 130, left: 20, rotate: "-5deg"}}
+        />
+        {/* top -30 do coração 1 */}
+        <FaHeart
+          size={13}
+          style={{ position: "absolute", top: 143, left: 50, rotate: "3deg"}}
+        />
+        {/* top +13 do coração 2 */}
+         {/*corações 2*/}
+        <FaHeart
+          size={30}
+          style={{ position: "absolute", top: 440, right: 20, rotate: "5deg"}}
+        />
+        <FaHeart
+          size={20}
+          style={{ position: "absolute", top: 410, right: 20, rotate: "-5deg"}}
+        />
+        <FaHeart
+          size={13}
+          style={{ position: "absolute", top: 423, right: 50, rotate: "3deg"}}
+        />
+        {/*corações 3*/}
+        <FaHeart
+          size={30}
+          style={{ position: "absolute", top: 690, left: 800, rotate: "-5deg"}}
+        />
+        <FaHeart
+          size={20}
+          style={{ position: "absolute", top: 665, left: 790, rotate: "5deg"}}
+        />
+        {/* corações 4 */}
+        <FaHeart
+          size={30}
+          style={{ position: "absolute", top: 1250, right: 535, rotate: "5deg"}}
+        />
+        <FaHeart
+          size={20}
+          style={{ position: "absolute", top: 1220, right: 525, rotate: "-5deg"}}
+        />
+      </div>
+
 
       {/* Galeria */}
       <section id="galeria" style={{ padding: "20px", background: "#f3e8ff" }}>
@@ -404,7 +457,7 @@ export default function Home() {
             style={{ margin: "5px" }}
           />
           <input
-            type="text"
+            type="number"
             placeholder="Preço"
             value={novoProduto.preco}
             onChange={(e) =>
