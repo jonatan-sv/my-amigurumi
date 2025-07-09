@@ -48,7 +48,11 @@ export default function Home() {
 
   const aplicarDesconto = (index, preco) => {
     const atualizados = [...produtos];
-    atualizados[index].desconto = preco;
+    if (Number(preco) === Number(atualizados[index].preco)) {
+      atualizados[index].desconto = 0;
+    } else {
+      atualizados[index].desconto = preco;
+    }
     setProdutos(atualizados);
     ativarDesconto(index);
   }
@@ -85,7 +89,7 @@ export default function Home() {
       <img
         src="/logo.png"
         alt="Logo My Amigurumi"
-        style={{ width: "100px", position: "fixed", left: "25%", top: "0", zIndex: 1 }}
+        style={{ width: "100px", position: "absolute", left: "5%", top: "2%", zIndex: 1 }}
       />
 
       {/* Galeria */}
@@ -149,91 +153,107 @@ export default function Home() {
                 }}
               />
               <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
-                  <div>
-                    R$
-                  <input
-                    value={produto.preco}
-                    onChange={(e) => handleChangeProduto(index, "preco", e.target.value)}
-                    onKeyDown={(e) => {
-                      if (
-                        ["Backspace", "Delete", "Tab", "Escape", "Enter", "ArrowLeft", "ArrowRight", ",", "."].includes(e.key)
-                      ) {
-                        return;
-                      }
-
-                      if (!/^[0-9]$/.test(e.key)) {
-                        e.preventDefault();
-                      }
-                    }}
-                    style={{
-                      fontSize: "14px",
-                      marginTop: "5px",
-                      textAlign: "center",
-                      border: "none",
-                      borderBottom: "1px solid #ccc",
-                      width: "50%",
-                    }}
-                    />
+                <div>
+                  {produto.desconto && Number(produto.desconto) > 0 ? (
+                    <>
+                      <span style={{ textDecoration: "line-through", color: "red", marginRight: 8 }}>
+                        R$ {Number(produto.preco).toFixed(2)}
+                      </span>
+                      <span style={{ color: "green", fontWeight: "bold" }}>
+                        R$ {Number(produto.desconto).toFixed(2)}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      R$
+                      <input
+                        value={produto.preco}
+                        onChange={(e) => handleChangeProduto(index, "preco", e.target.value)}
+                        onKeyDown={(e) => {
+                          if (
+                            ["Backspace", "Delete", "Tab", "Escape", "Enter", "ArrowLeft", "ArrowRight", ",", "."].includes(e.key)
+                          ) {
+                            return;
+                          }
+                          if (!/^[0-9]$/.test(e.key)) {
+                            e.preventDefault();
+                          }
+                        }}
+                        style={{
+                          fontSize: "14px",
+                          marginTop: "5px",
+                          textAlign: "center",
+                          border: "none",
+                          borderBottom: "1px solid #ccc",
+                          width: "50%",
+                        }}
+                      />
+                    </>
+                  )}
+                </div>
+                <button
+                  onClick={() => ativarDesconto(index)}
+                  style={{
+                    fontSize: "14px",
+                    marginTop: "5px",
+                    textAlign: "center",
+                    border: "none",
+                    background: "#3d0066",
+                    color: "#fff",
+                    padding: "5px 10px",
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                    display: produto.hidden ? "block" : "none",
+                  }}
+                >
+                  Adicionar Desconto
+                </button>
+                <input
+                  onChange={(e) => handleChangeProduto(index, "desconto", e.target.value)}
+                  onKeyDown={(e) => {
+                    if (
+                      ["Backspace", "Delete", "Tab", "Escape", "Enter", "ArrowLeft", "ArrowRight", ",", "."].includes(e.key)
+                    ) {
+                      return;
+                    }
+                    if (!/^[0-9]$/.test(e.key)) {
+                      e.preventDefault();
+                    }
+                  }}
+                  value={produto.desconto}
+                  style={{
+                    fontSize: "14px",
+                    marginTop: "5px",
+                    textAlign: "center",
+                    border: "none",
+                    borderBottom: "1px solid #ccc",
+                    width: "50%",
+                    display: produto.hidden ? "none" : "block",
+                  }}
+                />
+                <button
+                  onClick={() => aplicarDesconto(index, produto.desconto)}
+                  style={{
+                    fontSize: "14px",
+                    marginTop: "5px",
+                    textAlign: "center",
+                    border: "none",
+                    background: "#3d0066",
+                    color: "#fff",
+                    padding: "5px 10px",
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                    display: produto.hidden ? "none" : "block",
+                  }}
+                >
+                  Aplicar Desconto
+                </button>
+                {produto.desconto && Number(produto.desconto) > 0 && (
+                  <div style={{ fontSize: "14px", marginTop: "10px", textAlign: "center" }}>
+                    O desconto atual é de {((1 - Number(produto.desconto) / Number(produto.preco)) * 100).toFixed(2)}%
                   </div>
-                  <button 
-                    onClick={() => ativarDesconto(index)}
-                    style={{
-                      fontSize: "14px",
-                      marginTop: "5px",
-                      textAlign: "center",
-                      border: "none",
-                      background: "#3d0066",
-                      color: "#fff",
-                      padding: "5px 10px",
-                      borderRadius: "5px",
-                      cursor: "pointer",
-                      display: produto.hidden ? "block" : "none",
-                  }}>
-                    Adicionar Desconto
-                  </button>
-                  <input
-                    onChange={(e) => handleChangeProduto(index, "desconto", e.target.value)}
-                    onKeyDown={(e) => {
-                      if (
-                        ["Backspace", "Delete", "Tab", "Escape", "Enter", "ArrowLeft", "ArrowRight", ",", "."].includes(e.key)
-                      ) {
-                        return;
-                      }
-                      if (!/^[0-9]$/.test(e.key)) {
-                        e.preventDefault();
-                      }
-                    }}
-                    value={produto.desconto}
-                    style={{
-                      fontSize: "14px",
-                      marginTop: "5px",
-                      textAlign: "center",
-                      border: "none",
-                      borderBottom: "1px solid #ccc",
-                      width: "50%",
-                      display: produto.hidden ? "none" : "block",
-                    }}
-                    />
-                    <button 
-                      onClick={() => aplicarDesconto(index, produto.desconto)}
-                      style={{
-                        fontSize: "14px",
-                        marginTop: "5px",
-                        textAlign: "center",
-                        border: "none",
-                        background: "#3d0066",
-                        color: "#fff",
-                        padding: "5px 10px",
-                        borderRadius: "5px",
-                        cursor: "pointer",
-                        display: produto.hidden ? "none" : "block",
-                    }}>
-                      Aplicar Desconto
-                    </button>
-                    <div style={{ fontSize: "14px", marginTop: "10px", textAlign: "center" }}>
-                      O desconto atual é de {((produto.desconto * 100) / produto.preco).toFixed(2)}%
-                    </div>
-                  </div>
+                )}
+              </div>
             </div>
           ))}
         </div>
