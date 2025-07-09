@@ -151,7 +151,7 @@ export default function Home() {
       />
 
       {/* Galeria */}
-      <section id="galeria" style={{ padding: "20px", background: "#f3e8ff" }}>
+      <section id="galeria" style={{ padding: "20px", background: "#f3e8ff", scrollMarginTop: "100px" }}>
         <div
           style={{
             backgroundColor: "white",
@@ -378,7 +378,7 @@ export default function Home() {
       </section>
 
       {/* Adicionar Produtos */}
-      <section id="adicionar" style={{ marginTop: "60px" }}>
+      <section id="adicionar" style={{ marginTop: "60px", scrollMarginTop: "100px"}}>
         <div
           style={{
             backgroundColor: "white",
@@ -428,7 +428,7 @@ export default function Home() {
       </section>
 
       {/* Agenda */}
-      <section id="agenda" style={{ marginTop: "60px" }}>
+      <section id="agenda" style={{ marginTop: "60px", scrollMarginTop: "100px"}}>
         <div
           style={{
             backgroundColor: "white",
