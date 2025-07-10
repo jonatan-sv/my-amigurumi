@@ -1,26 +1,31 @@
 import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router";
-import { auth } from "../services/firebase";
+import { supabase } from "../services/supabaseClient";
 import styles from "./styles/Login.module.css";
-import logoFinal from "../assets/logo.svg";
-import "./styles/Global.css";
+import logo from "../assets/logo.svg";
 
-export default function Login() {
+function Login() {
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    setError(null);
+    setLoading(true);
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      // Redireciona para o painel de administração após o login bem-sucedido
+      const { error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+      });
+      if (error) throw error;
       navigate("/admin");
-    } catch (err) {
-      setError("Falha no login. Verifique suas credenciais.");
-      console.error(err);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -28,37 +33,40 @@ export default function Login() {
     <div className={styles.container}>
       <div className={styles.container2}>
         <img
-          src={logoFinal}
+          src={logo}
           alt="Logo do site"
           className="logo-final"
           width={"300px"}
         />
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleLogin}>
           <div className={styles.form}>
-            <label htmlFor="email">Usuário</label>
+            <label htmlFor="email">Email</label>
             <input
               id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              //placeholder="E-mail"
               required
             />
+          </div>
+          <div className={styles.form}>
             <label htmlFor="password">Senha</label>
             <input
               id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              //placeholder="Senha"
               required
             />
-            <button type="submit">Entrar</button>
+            <button type="submit" disabled={loading}>
+              {loading ? "Entrando..." : "Entrar"}
+            </button>
           </div>
+          {error && <p className="error">{error}</p>}
         </form>
       </div>
-
-      {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
   );
 }
+
+export default Login;

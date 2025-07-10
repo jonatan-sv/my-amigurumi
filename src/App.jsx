@@ -1,31 +1,41 @@
 import "./screens/styles/Global.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router";
-import { AuthProvider } from "./context/AuthContext";
-import PrivateRoute from "./screens/PrivateRoute";
-import Home from "./screens/Home";
+import { useState, useEffect } from "react";
+import { Routes, Route } from "react-router";
+import { supabase } from "./services/supabaseClient";
 import Login from "./screens/Login";
-import AdminPanel from "./screens/AdminPanel";
+import Admin from "./screens/Admin";
+import Home from "./screens/Home";
 
 export default function App() {
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    // Pega a sessão atual
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    // Ouve mudanças no estado de autenticação (login/logout)
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_, session) => {
+      setSession(session);
+    });
+
+    // Limpa a inscrição quando o componente é desmontado
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const checkSession = session ? <Admin session={session} /> : <Login />;
+
   return (
-    <Router>
-      <AuthProvider>
-        <Routes>
-          {/* Rota pública */}
-          <Route path="/" element={<Home />} />
-
-          {/* Rota de login */}
-          <Route path="/login" element={<Login />} />
-
-          {/* Rota protegida para o painel de administração */}
-          <Route path="/admin" element={<PrivateRoute />}>
-            <Route path="/admin" element={<AdminPanel />} />
-          </Route>
-
-          {/* Rota para lidar com caminhos não encontrados */}
-          <Route path="*" element={<h1>404 - Página não encontrada</h1>} />
-        </Routes>
-      </AuthProvider>
-    </Router>
+    <div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/admin" element={checkSession} />
+        <Route path="*" element={<Home />} />
+      </Routes>
+    </div>
   );
 }
