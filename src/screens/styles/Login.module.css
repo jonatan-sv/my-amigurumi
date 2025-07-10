@@ -23,7 +23,7 @@
 .form>input {
     all: unset;
     background: white;
-    border: 3px solid #400F4F;
+    border: 3px solid var(--dark-purple);
     border-radius: 60px;
     width: 24vw;
     padding: 12px
@@ -32,10 +32,10 @@
 .form>button {
     all: unset;
     background-color: white;
-    outline: 3px solid #400F4F;
+    outline: 3px solid var(--dark-purple);
     padding: 20px 30px 20px 30px;
     border-radius: 60px;
-    box-shadow: 0px 4px 0px 4px #400F4F;
+    box-shadow: 0px 4px 0px 4px var(--dark-purple);
     font-weight: 500;
     font-size: 20px;
     text-align: center;
@@ -44,7 +44,7 @@
 
 .form>button:hover {
     transform: translateY(2px);
-    box-shadow: 0px 2px 0px 2px #400F4F;
+    box-shadow: 0px 2px 0px 2px var(--dark-purple);
     cursor: pointer;
 }
 
