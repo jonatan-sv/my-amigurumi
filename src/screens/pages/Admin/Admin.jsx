@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { FaHeart } from "react-icons/fa6";
-import NavBar from "../../components/NavBar";
-import Hero from "./sections/Hero";
-import Galery from "../../components/Galery";
-import Footer from "./sections/Footer";
-import AgendaSection from "./sections/Agenda";
-import ContatosSection from "./sections/Contatos";
-import AdicionarSection from "./sections/Adicionar";
+import NavBar from "@components/NavBar";
+import Galery from "@components/Galery";
+import Hero from "@sections/Hero";
+import Footer from "@sections/Footer";
+import AgendaSection from "@sections/Agenda";
+import ContatosSection from "@sections/Contatos";
+import AdicionarSection from "@sections/Adicionar";
 
 export default function Admin() {
   const [produtos, setProdutos] = useState([

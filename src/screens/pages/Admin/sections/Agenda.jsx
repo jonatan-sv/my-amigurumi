@@ -1,6 +1,6 @@
-import AmountButton from "../../../components/AmountButton";
-import SectionTitle from "../../../components/SectionTitle";
-import Calendar from "../../../components/Calendar";
+import AmountButton from "@components/AmountButton";
+import SectionTitle from "@components/SectionTitle";
+import Calendar from "@components/Calendar";
 
 export default function Agenda({ setEncomendas, encomendas }) {
   return (
