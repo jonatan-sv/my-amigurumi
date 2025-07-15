@@ -1,4 +1,4 @@
-import logo from "../../assets/logo.svg";
+import logo from "../../../../assets/logo.svg";
 import { AiFillTikTok } from "react-icons/ai";
 import { FaBluesky, FaInstagram } from "react-icons/fa6";
 

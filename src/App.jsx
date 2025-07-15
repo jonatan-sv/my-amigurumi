@@ -2,9 +2,9 @@ import "./screens/styles/Global.css";
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router";
 import { supabase } from "./services/supabaseClient";
-import Login from "./screens/Login";
-import Admin from "./screens/Admin";
-import Home from "./screens/Home";
+import Login from "./screens/pages/Login/Login";
+import Admin from "./screens/pages/Admin/Admin";
+import Home from "./screens/pages/Home/Home";
 
 export default function App() {
   const [session, setSession] = useState(null);

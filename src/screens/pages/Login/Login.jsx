@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { supabase } from "../services/supabaseClient";
-import styles from "./styles/Login.module.css";
-import logo from "../assets/logo.svg";
+import { supabase } from "../../../services/supabaseClient";
+import styles from "./Login.module.css";
+import logo from "../../../assets/logo.svg";
 
 function Login() {
   const [loading, setLoading] = useState(false);
