@@ -8,12 +8,10 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError(null);
     setLoading(true);
     try {
       const { error } = await supabase.auth.signInWithPassword({
@@ -23,7 +21,11 @@ function Login() {
       if (error) throw error;
       navigate("/admin");
     } catch (error) {
-      setError(error.message);
+      if (error.code === "invalid_credentials") {
+        alert("E-mail ou senha inválidos!");
+      } else {
+        alert("Erro ao tentar entrar!");
+      }
     } finally {
       setLoading(false);
     }
@@ -32,12 +34,14 @@ function Login() {
   return (
     <div className={styles.container}>
       <div className={styles.container2}>
-        <img
-          src={logo}
-          alt="Logo do site"
-          className="logo-final"
-          width={"300px"}
-        />
+        <div className={styles.logo}>
+          <img
+            src={logo}
+            alt="Logo do site"
+            className="logo-final"
+            width={"300px"}
+          />
+        </div>
         <form onSubmit={handleLogin}>
           <div className={styles.form}>
             <label htmlFor="email">Email</label>
@@ -46,6 +50,7 @@ function Login() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="Digite seu e-mail"
               required
             />
           </div>
@@ -56,13 +61,13 @@ function Login() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="Digite sua senha"
               required
             />
             <button type="submit" disabled={loading}>
               {loading ? "Entrando..." : "Entrar"}
             </button>
           </div>
-          {error && <p className="error">{error}</p>}
         </form>
       </div>
     </div>
