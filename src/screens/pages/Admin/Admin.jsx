@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NavBar from "@components/NavBar";
 import Galery from "@components/Galery";
 import Hearts from "@components/Hearts";
@@ -7,31 +7,23 @@ import Footer from "@sections/Footer";
 import AgendaSection from "@sections/Agenda";
 import ContatosSection from "@sections/Contatos";
 import AdicionarSection from "@sections/Adicionar";
+import { fetchProdutos } from "@services/supabaseDB";
 
 export default function Admin() {
-  const [produtos, setProdutos] = useState([
-    {
-      nome: "Boneca Amarela",
-      preco: 80.0,
-      imagem:
-        "https://www.lojinhauai.com/image/cache/catalog/Fotos/amigurumi-croche-menino-cabelo-enrolado-1000x1000.jpg",
-      desconto: 0,
-      hidden: true,
-    },
-    {
-      nome: "Gatinho Roxo",
-      preco: 60.0,
-      imagem:
-        "https://www.lojinhauai.com/image/cache/catalog/Fotos/amigurumi-croche-menina-674x674.jpg",
-      desconto: 0,
-      hidden: true,
-    },
-  ]);
+  const [produtos, setProdutos] = useState([]);
+
+  const fetch = async () => {
+    const result = await fetchProdutos();
+    result.data
+      ? setProdutos(result.data)
+      : console.error("Erro ao salvar produtos");
+    console.log(result.data);
+  };
 
   const [novoProduto, setNovoProduto] = useState({
     nome: "",
     preco: "",
-    imagem: "",
+    imagem_url: "",
   });
 
   const [contatos, setContatos] = useState({
@@ -81,6 +73,10 @@ export default function Admin() {
     setProdutos(atualizados);
     ativarDesconto(index);
   };
+
+  useEffect(() => {
+    fetch();
+  }, []);
 
   return (
     <>

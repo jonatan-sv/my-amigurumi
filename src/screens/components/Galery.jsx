@@ -57,7 +57,7 @@ export default function Galery({
               <TbTrashXFilled />
             </button>
 
-            <img src={produto.imagem} alt={produto.nome} width="150" />
+            <img src={produto.imagem_url} alt={produto.nome} width="150" />
             <input
               value={produto.nome}
               onChange={(e) =>
