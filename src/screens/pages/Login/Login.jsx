@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { supabase } from "@services/supabaseClient";
 import styles from "./Login.module.css";
 import logo from "@assets/logo.svg";
+import { loginHandler } from "@services/supabaseAuth";
 
 function Login() {
   const [loading, setLoading] = useState(false);
@@ -13,22 +13,10 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email: email,
-        password: password,
-      });
-      if (error) throw error;
-      navigate("/admin");
-    } catch (error) {
-      if (error.code === "invalid_credentials") {
-        alert("E-mail ou senha inválidos!");
-      } else {
-        alert("Erro ao tentar entrar!");
-      }
-    } finally {
-      setLoading(false);
-    }
+    const result = await loginHandler({ email, password });
+
+    result.success ? navigate("/admin") : alert(result.text);
+    setLoading(false);
   };
 
   return (
