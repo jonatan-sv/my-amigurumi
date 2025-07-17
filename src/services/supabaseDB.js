@@ -5,6 +5,8 @@ export async function fetchProdutos() {
   return { data };
 }
 
+/* Adicionar a funções de atualizar e apagar produtos */
+
 export async function fetchLojaInfo() {
   const { data } = await supabase
     .from("infos")
@@ -12,4 +14,13 @@ export async function fetchLojaInfo() {
     .eq("id", 1)
     .single();
   return { data };
+}
+
+export async function updateLojaInfo(lojaInfo) {
+  const { error } = await supabase
+    .from("infos")
+    .update({ ...lojaInfo })
+    .eq("id", 1);
+  if (error) return { succes: false };
+  else return { succes: false };
 }
