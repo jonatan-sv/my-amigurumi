@@ -6,6 +6,11 @@
     top: 0;
     position: sticky;
     z-index: 1;
+
+    @media (max-width: 768px) {
+        display: none;
+    }
+
 }
 
 .navbar {
