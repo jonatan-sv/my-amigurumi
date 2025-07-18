@@ -52,11 +52,11 @@ export default function Admin() {
     setProdutos(atualizados);
   };
 
-  const removerProduto = (index) => {
-    const novaLista = produtos.filter((_, i) => i !== index);
-    setProdutos(novaLista);
+const removerProduto = async (index) => {
+    await deleteProduto(produtos[index].id);
+    fetch();
   };
-
+  
   const ativarDesconto = (index) => {
     const atualizados = [...produtos];
     atualizados[index].hidden = !atualizados[index].hidden;
