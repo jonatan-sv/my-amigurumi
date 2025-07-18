@@ -15,6 +15,7 @@ import Footer from "@sections/Footer";
 import { fetchProdutos, fetchLojaInfo } from "@services/supabaseDB";
 import Calendar from "@components/Calendar2";
 import SectionTitle from "@components/SectionTitle";
+import VagasBox from "@components/VagasBox";
 
 export default function Admin() {
   const [produtos, setProdutos] = useState([]);
@@ -44,62 +45,20 @@ export default function Admin() {
       <div style={{ textAlign: "center" }}>
         <NavBar />
         <Hero />
+        <Hearts />
 
-        <Hearts></Hearts>
+        <VagasBox vagas={lojaInfo.vagas} />
 
-        <div
-          className="pedido-box"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            marginTop: "3rem",
-            marginBottom: "5rem",
-            fontFamily: "'Segoe UI', sans-serif",
-          }}
-        >
-          <label
-            htmlFor="vagas"
-            style={{
-              fontSize: "2rem",
-              fontWeight: "bold",
-              marginBottom: "0.5rem",
-              color: "#3b0056",
-            }}
-          >
-            Vagas de encomendas
-          </label>
-          <div
-            style={{
-              display: "flex",
-              flexFlow: "column nowrap",
-              justifyContent: "center",
-              alignItems: "center",
-              width: "80px",
-              height: "80px",
-              fontSize: "2rem",
-              borderRadius: "20px",
-              border: "3px solid #3b0056",
-              backgroundColor: "#e8d6fa",
-              color: "#3b0056",
-              boxShadow: "5px 5px 0 #3b0056",
-              outline: "none",
-            }}
-          >
-            {lojaInfo.vagas}
-          </div>
-        </div>
-
-        <Galery produtos={produtos}></Galery>
+        <Galery produtos={produtos} />
 
         <div id="agenda" style={{ marginBottom: "10vh" }}>
           <div style={{ marginBottom: "20px" }}>
             <SectionTitle>Agenda de Eventos</SectionTitle>
           </div>
-          <Calendar url={lojaInfo.agenda}></Calendar>
+          <Calendar url={lojaInfo.agenda} />
         </div>
 
-        <Footer contatos={lojaInfo}></Footer>
+        <Footer contatos={lojaInfo} />
       </div>
     </>
   );
