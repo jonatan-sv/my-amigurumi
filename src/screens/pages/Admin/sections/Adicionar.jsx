@@ -32,7 +32,7 @@ export default function AdicionarSection({
           style={{ margin: "5px" }}
         />
         <input
-          type="text"
+          type="number"
           inputMode="numeric"
           pattern="[0-9]*"
           min="0"
@@ -46,9 +46,21 @@ export default function AdicionarSection({
         <input
           type="text"
           placeholder="URL da imagem"
-          value={novoProduto.imagem}
+          value={novoProduto.imagem_url}
           onChange={(e) =>
-            setNovoProduto({ ...novoProduto, imagem: e.target.value })
+            setNovoProduto({ ...novoProduto, imagem_url: e.target.value })
+          }
+          style={{ margin: "5px" }}
+        />
+        <input
+          type="number"
+          inputMode="numeric"
+          pattern="[0-9]*"
+          min="0"
+          placeholder="Quantidade em estoque"
+          value={novoProduto.quantidade}
+          onChange={(e) =>
+            setNovoProduto({ ...novoProduto, quantidade: e.target.value })
           }
           style={{ margin: "5px" }}
         />

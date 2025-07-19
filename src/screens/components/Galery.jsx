@@ -5,8 +5,7 @@ export default function Galery({
   produtos,
   removerProduto,
   handleChangeProduto,
-  ativarDesconto,
-  aplicarDesconto,
+  updateProduto
 }) {
   return (
     <section
@@ -34,8 +33,7 @@ export default function Galery({
             produto={produto}
             removerProduto={removerProduto}
             handleChangeProduto={handleChangeProduto}
-            ativarDesconto={ativarDesconto}
-            aplicarDesconto={aplicarDesconto}
+            updateProduto={updateProduto}
           />
         ))}
       </div>
