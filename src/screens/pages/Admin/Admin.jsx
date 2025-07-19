@@ -6,8 +6,9 @@ import Hero from "@sections/Hero";
 import Footer from "@sections/Footer";
 import AgendaSection from "@sections/Agenda";
 import ContatosSection from "@sections/Contatos";
-import AdicionarSection from "@sections/Adicionar";
+import AdicionarSection from "@sections/Adicionar"
 import { fetchProdutos, deleteProduto, updateProduto, addProduto } from "@services/supabaseDB";
+
 
 export default function Admin() {
   const [produtos, setProdutos] = useState([]);
@@ -37,6 +38,7 @@ export default function Admin() {
 
   const adicionarProduto = () => {
     if (!novoProduto.nome || !novoProduto.preco || !novoProduto.imagem_url) return;
+
     addProduto(novoProduto);
     setNovoProduto({
       nome: "",
@@ -44,6 +46,7 @@ export default function Admin() {
       imagem_url: "",
       promo: 0,
       hidden: true,
+      quantidade: 0,
     });
     fetch();
   }; // Atualmente ao adicionar um produto com url de imagem ele não atualiza imediatamente, ver como resolver depois

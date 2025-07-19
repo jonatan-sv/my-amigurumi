@@ -44,6 +44,7 @@ export default function AdicionarSection({
           style={{ margin: "5px" }}
         />
         <input
+
           type="text"
           placeholder="URL da imagem"
           value={novoProduto.imagem_url}
@@ -61,6 +62,7 @@ export default function AdicionarSection({
           value={novoProduto.quantidade}
           onChange={(e) =>
             setNovoProduto({ ...novoProduto, quantidade: e.target.value })
+
           }
           style={{ margin: "5px" }}
         />
