@@ -23,9 +23,6 @@ export default function Admin() {
   const [lojaInfo, setLojaInfo] = useState({});
   const [precoMin, setPrecoMin] = useState("");
   const [precoMax, setPrecoMax] = useState("");
-  const [promocao, setPromocao] = useState(false);
-  const [mostrarFiltros, setMostrarFiltros] = useState(false);
-
 
   const fetch = async () => {
     const result = await fetchProdutos();
@@ -50,12 +47,10 @@ export default function Admin() {
     const preco = Number(produto.preco);
     const dentroMin = !precoMin || preco >= Number(precoMin);
     const dentroMax = !precoMax || preco <= Number(precoMax);
-
-    const passaPromocao = !promocao || produto.promocao === true;
-    return dentroMin && dentroMax && passaPromocao;
+    return dentroMin && dentroMax;
   });
 
-
+  const [mostrarFiltros, setMostrarFiltros] = useState(false);
 
   return (
     <>
@@ -66,31 +61,35 @@ export default function Admin() {
 
         <VagasBox vagas={lojaInfo.vagas} />
 
+        <div style={{ margin: "30px 0 10px 0", display: "flex", flexDirection: "column", alignItems: "center", gap: "20px" }}>
+          <EncomendarButton onClick />
 
-        <button
-          onClick={() => setMostrarFiltros(m => !m)}
-          style={{
-            margin: "30px 0 10px 0",
-            padding: "8px 16px",
-            borderRadius: "1rem",
-            border: "1px solid #A56BE6 ",
-            background: "#e8d6fa",
-            cursor: "pointer",
-            fontWeight: "bold"
-          }}
-        >
-          {mostrarFiltros ? "Esconder filtros" : "Filtros de preço"}
-        </button>
+         <SectionTitle>Galeria</SectionTitle>
+
+          <button
+            onClick={() => setMostrarFiltros(m => !m)}
+            style={{
+              padding: "8px 16px",
+              borderRadius: "1rem",
+              border: "1px solid #A56BE6 ",
+              background: "#e8d6fa",
+              cursor: "pointer",
+              fontWeight: "bold",
+              fontSize: "13px",
+            }}
+          >
+            {mostrarFiltros ? "Esconder filtros" : "Filtros de preço"}
+          </button>
+        </div>
 
         {mostrarFiltros && (
           <div
             style={{
-              margin: "20px 0",
+              margin: "30px 0",
               display: "flex",
               justifyContent: "center",
-              gap: "20px",
-              alignItems: "right",
-
+              gap: "15px",
+              alignItems: "center",
               fontSize: "15px",
             }}
           >
@@ -110,21 +109,10 @@ export default function Admin() {
                 type="number"
                 value={precoMax}
                 onChange={e => setPrecoMax(e.target.value)}
-
-                style={{  width: "50px", height: "15px", marginLeft: "5px", fontSize: "15px" }}
+                style={{ width: "50px", height: "15px", marginLeft: "5px", fontSize: "15px" }}
                 min={0}
               />
             </label>
-            <label>
-              <input
-                type="checkbox"
-                checked={promocao}
-                onChange={e => setPromocao(e.target.checked)}
-                style={{ marginRight: "5px" }}
-              />
-              Promoções
-            </label>
-
           </div>
         )}
 
