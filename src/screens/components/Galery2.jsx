@@ -10,7 +10,7 @@ export default function Galery({ produtos }) {
         scrollMarginTop: "100px",
       }}
     >
-      <SectionTitle>Galeria</SectionTitle>
+ 
 
       <div
         style={{
@@ -32,7 +32,9 @@ export default function Galery({ produtos }) {
               background: "#fff",
               scrollSnapAlign: "start",
               position: "relative",
+
               boxShadow: "5px 5px 0 #3d0066",
+
             }}
           >
             <img src={produto.imagem_url} alt={produto.nome} width="150" height="150" />

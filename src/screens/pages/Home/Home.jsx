@@ -26,6 +26,7 @@ export default function Admin() {
   const [promocao, setPromocao] = useState(false);
   const [mostrarFiltros, setMostrarFiltros] = useState(false);
 
+
   const fetch = async () => {
     const result = await fetchProdutos();
     result.data
@@ -49,9 +50,12 @@ export default function Admin() {
     const preco = Number(produto.preco);
     const dentroMin = !precoMin || preco >= Number(precoMin);
     const dentroMax = !precoMax || preco <= Number(precoMax);
+
     const passaPromocao = !promocao || produto.promocao === true;
     return dentroMin && dentroMax && passaPromocao;
   });
+
+
 
   return (
     <>
@@ -61,6 +65,7 @@ export default function Admin() {
         <Hearts />
 
         <VagasBox vagas={lojaInfo.vagas} />
+
 
         <button
           onClick={() => setMostrarFiltros(m => !m)}
@@ -85,6 +90,7 @@ export default function Admin() {
               justifyContent: "center",
               gap: "20px",
               alignItems: "right",
+
               fontSize: "15px",
             }}
           >
@@ -104,6 +110,7 @@ export default function Admin() {
                 type="number"
                 value={precoMax}
                 onChange={e => setPrecoMax(e.target.value)}
+
                 style={{  width: "50px", height: "15px", marginLeft: "5px", fontSize: "15px" }}
                 min={0}
               />
@@ -117,6 +124,7 @@ export default function Admin() {
               />
               Promoções
             </label>
+
           </div>
         )}
 
