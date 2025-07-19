@@ -6,8 +6,9 @@ import Hero from "@sections/Hero";
 import Footer from "@sections/Footer";
 import AgendaSection from "@sections/Agenda";
 import ContatosSection from "@sections/Contatos";
-import AdicionarSection from "@sections/Adicionar";
-import { fetchProdutos } from "@services/supabaseDB";
+import AdicionarSection from "@sections/Adicionar"
+import { fetchProdutos, deleteProduto, updateProduto, addProduto } from "@services/supabaseDB";
+
 
 export default function Admin() {
   const [produtos, setProdutos] = useState([]);
@@ -17,13 +18,14 @@ export default function Admin() {
     result.data
       ? setProdutos(result.data)
       : console.error("Erro ao salvar produtos");
-    console.log(result.data);
   };
 
   const [novoProduto, setNovoProduto] = useState({
     nome: "",
     preco: "",
     imagem_url: "",
+    promo: 0,
+    quantidade: 0,
   });
 
   const [contatos, setContatos] = useState({
@@ -35,45 +37,36 @@ export default function Admin() {
   const [encomendas, setEncomendas] = useState(3);
 
   const adicionarProduto = () => {
-    if (!novoProduto.nome || !novoProduto.preco || !novoProduto.imagem) return;
-    setProdutos([...produtos, novoProduto]);
+    if (!novoProduto.nome || !novoProduto.preco || !novoProduto.imagem_url) return;
+
+    addProduto(novoProduto);
     setNovoProduto({
       nome: "",
       preco: 0,
-      imagem: "",
-      desconto: 0,
+      imagem_url: "",
+      promo: 0,
       hidden: true,
+      quantidade: 0,
     });
-  };
+    fetch();
+  }; // Atualmente ao adicionar um produto com url de imagem ele não atualiza imediatamente, ver como resolver depois
 
-  const handleChangeProduto = (index, campo, valor) => {
-    const atualizados = [...produtos];
-    atualizados[index][campo] = valor;
-    setProdutos(atualizados);
-  };
+  const handleChangeProduto = (index, chave, valor) => {
+    const novosProdutos = [...produtos];
+    novosProdutos[index][chave] = valor;
+    setProdutos(novosProdutos);
+  }
 
-const removerProduto = async (index) => {
+  const atualizarProduto = async (index) => {
+    await updateProduto(produtos[index].id, produtos[index]);
+    fetch();
+  }
+
+  const removerProduto = async (index) => {
     await deleteProduto(produtos[index].id);
     fetch();
   };
   
-  const ativarDesconto = (index) => {
-    const atualizados = [...produtos];
-    atualizados[index].hidden = !atualizados[index].hidden;
-    setProdutos(atualizados);
-  };
-
-  const aplicarDesconto = (index, preco) => {
-    const atualizados = [...produtos];
-    if (Number(preco) === Number(atualizados[index].preco)) {
-      atualizados[index].desconto = 0;
-    } else {
-      atualizados[index].desconto = preco;
-    }
-    setProdutos(atualizados);
-    ativarDesconto(index);
-  };
-
   useEffect(() => {
     fetch();
   }, []);
@@ -90,8 +83,7 @@ const removerProduto = async (index) => {
           produtos={produtos}
           removerProduto={removerProduto}
           handleChangeProduto={handleChangeProduto}
-          ativarDesconto={ativarDesconto}
-          aplicarDesconto={aplicarDesconto}
+          updateProduto={atualizarProduto}
         ></Galery>
 
         <AdicionarSection

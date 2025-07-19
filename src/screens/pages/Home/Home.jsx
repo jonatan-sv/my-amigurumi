@@ -16,6 +16,7 @@ import { fetchProdutos, fetchLojaInfo } from "@services/supabaseDB";
 import Calendar from "@components/Calendar2";
 import SectionTitle from "@components/SectionTitle";
 import VagasBox from "@components/VagasBox";
+import EncomendarButton from "@components/EncomendarButton";
 
 export default function Admin() {
   const [produtos, setProdutos] = useState([]);
@@ -121,7 +122,7 @@ export default function Admin() {
 
         <Galery produtos={produtosFiltrados} />
 
-        <div id="agenda" style={{ marginBottom: "10vh" }}>
+        <div id="agenda" style={{ marginBottom: "10vh", scrollMarginTop: "15vh"}}>
           <div style={{ marginBottom: "20px" }}>
             <SectionTitle>Agenda de Eventos</SectionTitle>
           </div>
