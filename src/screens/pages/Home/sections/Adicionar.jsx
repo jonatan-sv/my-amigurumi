@@ -20,7 +20,6 @@ export default function AdicionarSection({
           flexFlow: "column nowrap",
           justifyContent: "center",
           alignItems: "center",
-          padding: "20px",
         }}
       >
         <input
