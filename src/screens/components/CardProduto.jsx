@@ -48,18 +48,18 @@ const CardProduto = ({ produto, index, removerProduto, handleChangeProduto, upda
   return (
     <div
       style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        alignItems: "center",
-        border: "1px solid #ccc",
+        flex: "0 0 auto",
+        border: "1px solid #A56BE6",
         borderRadius: "10px",
         padding: "15px",
         width: "240px",
         background: "#fff",
         scrollSnapAlign: "start",
         position: "relative",
+        boxShadow: "5px 5px 0 #3d0066",
       }}
+      //#A56BE6
+      //#3d0066
     >
       {/* Botão para remover */}
       <button
@@ -78,13 +78,19 @@ const CardProduto = ({ produto, index, removerProduto, handleChangeProduto, upda
         <TbTrashXFilled />
       </button>
 
-      {/* Imagem no topo */}
-      <img
-        src={produto.imagem_url}
-        alt={produto.nome}
-        width="90%"
-        height="60%"
-        style={{ objectFit: "contain", maxHeight: "160px" }}
+      <img src={produto.imagem_url} alt={produto.nome} width="150" height={"150"} />
+      <input
+        value={produto.nome}
+        onChange={(e) => handleChangeProduto(index, "nome", e.target.value)}
+        style={{
+          fontWeight: "bold",
+          fontSize: "16px",
+          marginTop: "10px",
+          textAlign: "center",
+          border: "none",
+          borderBottom: "1px solid #ccc",
+          width: "80%",
+        }}
       />
 
       {/* Conteúdo fixado ao fundo */}
@@ -113,6 +119,7 @@ const CardProduto = ({ produto, index, removerProduto, handleChangeProduto, upda
             <label style={labelStyle}>Preço: R$</label>
             {isEditando || !temDesconto ? (
               <input
+                type="number"
                 value={produto.preco}
                 disabled={!isEditando}
                 onChange={(e) =>
@@ -172,8 +179,62 @@ const CardProduto = ({ produto, index, removerProduto, handleChangeProduto, upda
           )}
         </div>
 
-        {/* Desconto visível */}
-        {produto.promo && Number(produto.promo) > 0 ? (
+        <button
+          onClick={() => ativarDesconto(index)}
+          style={{
+            fontSize: "14px",
+            marginTop: "5px",
+            textAlign: "center",
+            border: "none",
+            background: "#3d0066",
+            color: "#fff",
+            padding: "5px 10px",
+            borderRadius: "5px",
+            cursor: "pointer",
+            display: produto.hidden ? "block" : "none",
+            position: "absolute",
+            top: "50%",
+          }}
+        >
+          Adicionar Desconto
+        </button>
+
+        <input
+          onChange={(e) =>
+            handleChangeProduto(index, "desconto", e.target.value)
+          }
+          onKeyDown={handleKeyDown}
+          value={produto.desconto}
+          style={{
+            fontSize: "14px",
+            marginTop: "5px",
+            textAlign: "center",
+            border: "none",
+            borderBottom: "1px solid #ccc",
+            width: "50%",
+            display: produto.hidden ? "none" : "block",
+          }}
+        />
+
+        <button
+          onClick={() => aplicarDesconto(index, produto.desconto)}
+          style={{
+            fontSize: "14px",
+            marginTop: "5px",
+            textAlign: "center",
+            border: "none",
+            background: "#3d0066",
+            color: "#fff",
+            padding: "5px 10px",
+            borderRadius: "5px",
+            cursor: "pointer",
+            display: produto.hidden ? "none" : "block",
+          }}
+        >
+          Aplicar Desconto
+        </button>
+
+        {produto.desconto && Number(produto.desconto) > 0 ? (
           <div
             style={{
               fontSize: "13px",
