@@ -7,7 +7,7 @@ import Footer from "@sections/Footer";
 import AgendaSection from "@sections/Agenda";
 import ContatosSection from "@sections/Contatos";
 import AdicionarSection from "@sections/Adicionar";
-import { fetchProdutos } from "@services/supabaseDB";
+import { fetchProdutos, deleteProduto } from "@services/supabaseDB";
 
 export default function Admin() {
   const [produtos, setProdutos] = useState([]);
@@ -35,14 +35,12 @@ export default function Admin() {
   const [encomendas, setEncomendas] = useState(3);
 
   const adicionarProduto = () => {
-    if (!novoProduto.nome || !novoProduto.preco || !novoProduto.imagem) return;
+    if (!novoProduto.nome || !novoProduto.preco || !novoProduto.imagem_url) return;
     setProdutos([...produtos, novoProduto]);
     setNovoProduto({
       nome: "",
-      preco: 0,
-      imagem: "",
-      desconto: 0,
-      hidden: true,
+      preco: "",
+      imagem_url: "",
     });
   };
 
@@ -53,8 +51,10 @@ export default function Admin() {
   };
 
 const removerProduto = async (index) => {
-    await deleteProduto(produtos[index].id);
-    fetch();
+    const produto = produtos[index];
+    if (!produto || !produto.id) return;
+    await deleteProduto(produto.id);
+    setProdutos((prev) => prev.filter((_, i) => i !== index));
   };
   
   const ativarDesconto = (index) => {

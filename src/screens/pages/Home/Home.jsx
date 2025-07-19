@@ -51,7 +51,7 @@ export default function Admin() {
 
         <Galery produtos={produtos} />
 
-        <div id="agenda" style={{ marginBottom: "10vh" }}>
+        <div id="agenda" style={{ marginBottom: "10vh", scrollMarginTop: "15vh"}}>
           <div style={{ marginBottom: "20px" }}>
             <SectionTitle>Agenda de Eventos</SectionTitle>
           </div>

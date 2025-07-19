@@ -32,7 +32,7 @@ export default function AdicionarSection({
           style={{ margin: "5px" }}
         />
         <input
-          type="text"
+          type="number"
           inputMode="numeric"
           pattern="[0-9]*"
           min="0"
@@ -44,11 +44,11 @@ export default function AdicionarSection({
           style={{ margin: "5px" }}
         />
         <input
-          type="text"
-          placeholder="URL da imagem"
-          value={novoProduto.imagem}
+          type="file"
+          id="imagem"
+          value={novoProduto.imagem_url}
           onChange={(e) =>
-            setNovoProduto({ ...novoProduto, imagem: e.target.value })
+            setNovoProduto({ ...novoProduto, imagem_url: e.target.value })
           }
           style={{ margin: "5px" }}
         />
