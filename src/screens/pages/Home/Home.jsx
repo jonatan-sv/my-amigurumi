@@ -16,6 +16,7 @@ import { fetchProdutos, fetchLojaInfo } from "@services/supabaseDB";
 import Calendar from "@components/Calendar2";
 import SectionTitle from "@components/SectionTitle";
 import VagasBox from "@components/VagasBox";
+import EncomendarButton from "@components/EncomendarButton";
 
 export default function Admin() {
   const [produtos, setProdutos] = useState([]);
@@ -48,6 +49,9 @@ export default function Admin() {
         <Hearts />
 
         <VagasBox vagas={lojaInfo.vagas} />
+
+        {/* Botão acima da Galery */}
+        <EncomendarButton onClick/>
 
         <Galery produtos={produtos} />
 
