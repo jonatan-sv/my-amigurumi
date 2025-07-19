@@ -21,10 +21,6 @@ import EncomendarButton from "@components/EncomendarButton";
 export default function Admin() {
   const [produtos, setProdutos] = useState([]);
   const [lojaInfo, setLojaInfo] = useState({});
-  const [precoMin, setPrecoMin] = useState("");
-  const [precoMax, setPrecoMax] = useState("");
-  const [promocao, setPromocao] = useState(false);
-  const [mostrarFiltros, setMostrarFiltros] = useState(false);
 
   const fetch = async () => {
     const result = await fetchProdutos();
@@ -45,14 +41,6 @@ export default function Admin() {
     fetchLoja();
   }, []);
 
-  const produtosFiltrados = produtos.filter(produto => {
-    const preco = Number(produto.preco);
-    const dentroMin = !precoMin || preco >= Number(precoMin);
-    const dentroMax = !precoMax || preco <= Number(precoMax);
-    const passaPromocao = !promocao || produto.promocao === true;
-    return dentroMin && dentroMax && passaPromocao;
-  });
-
   return (
     <>
       <div style={{ textAlign: "center" }}>
@@ -62,65 +50,10 @@ export default function Admin() {
 
         <VagasBox vagas={lojaInfo.vagas} />
 
-        <button
-          onClick={() => setMostrarFiltros(m => !m)}
-          style={{
-            margin: "30px 0 10px 0",
-            padding: "8px 16px",
-            borderRadius: "1rem",
-            border: "1px solid #A56BE6 ",
-            background: "#e8d6fa",
-            cursor: "pointer",
-            fontWeight: "bold"
-          }}
-        >
-          {mostrarFiltros ? "Esconder filtros" : "Filtros de preço"}
-        </button>
+        {/* Botão acima da Galery */}
+        <EncomendarButton onClick/>
 
-        {mostrarFiltros && (
-          <div
-            style={{
-              margin: "20px 0",
-              display: "flex",
-              justifyContent: "center",
-              gap: "20px",
-              alignItems: "right",
-              fontSize: "15px",
-            }}
-          >
-            <label>
-              Preço mínimo:
-              <input
-                type="number"
-                value={precoMin}
-                onChange={e => setPrecoMin(e.target.value)}
-                style={{ width: "50px", height: "15px", marginLeft: "5px", fontSize: "15px" }}
-                min={0}
-              />
-            </label>
-            <label>
-              Preço máximo:
-              <input
-                type="number"
-                value={precoMax}
-                onChange={e => setPrecoMax(e.target.value)}
-                style={{  width: "50px", height: "15px", marginLeft: "5px", fontSize: "15px" }}
-                min={0}
-              />
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                checked={promocao}
-                onChange={e => setPromocao(e.target.checked)}
-                style={{ marginRight: "5px" }}
-              />
-              Promoções
-            </label>
-          </div>
-        )}
-
-        <Galery produtos={produtosFiltrados} />
+        <Galery produtos={produtos} />
 
         <div id="agenda" style={{ marginBottom: "10vh", scrollMarginTop: "15vh"}}>
           <div style={{ marginBottom: "20px" }}>
