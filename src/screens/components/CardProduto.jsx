@@ -22,14 +22,17 @@ const CardProduto = ({
     <div
       style={{
         flex: "0 0 auto",
-        border: "1px solid #ccc",
+        border: "1px solid #A56BE6",
         borderRadius: "10px",
         padding: "10px",
         width: "200px",
         background: "#fff",
         scrollSnapAlign: "start",
         position: "relative",
+        boxShadow: "5px 5px 0 #3d0066",
       }}
+      //#A56BE6
+      //#3d0066
     >
       <button
         onClick={() => removerProduto(index)}
@@ -47,7 +50,7 @@ const CardProduto = ({
         <TbTrashXFilled />
       </button>
 
-      <img src={produto.imagem_url} alt={produto.nome} width="150" />
+      <img src={produto.imagem_url} alt={produto.nome} width="150" height={"150"} />
       <input
         value={produto.nome}
         onChange={(e) => handleChangeProduto(index, "nome", e.target.value)}
@@ -89,6 +92,7 @@ const CardProduto = ({
             <>
               R$
               <input
+                type="number"
                 value={produto.preco}
                 onChange={(e) =>
                   handleChangeProduto(index, "preco", e.target.value)
@@ -120,6 +124,8 @@ const CardProduto = ({
             borderRadius: "5px",
             cursor: "pointer",
             display: produto.hidden ? "block" : "none",
+            position: "absolute",
+            top: "50%",
           }}
         >
           Adicionar Desconto

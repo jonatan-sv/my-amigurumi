@@ -25,16 +25,17 @@ export default function Galery({ produtos }) {
           <div
             key={index}
             style={{
-              border: "1px solid #ccc",
+              border: "1px solid #A56BE6",
               borderRadius: "10px",
               padding: "10px",
               width: "200px",
               background: "#fff",
               scrollSnapAlign: "start",
               position: "relative",
+              boxShadow: "5px 5px 0 #3d0066",
             }}
           >
-            <img src={produto.imagem_url} alt={produto.nome} width="150" />
+            <img src={produto.imagem_url} alt={produto.nome} width="150" height="150" />
 
             <div
               style={{

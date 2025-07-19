@@ -20,6 +20,7 @@ export default function AdicionarSection({
           flexFlow: "column nowrap",
           justifyContent: "center",
           alignItems: "center",
+          padding: "20px",
         }}
       >
         <input
@@ -32,7 +33,7 @@ export default function AdicionarSection({
           style={{ margin: "5px" }}
         />
         <input
-          type="text"
+          type="number"
           inputMode="numeric"
           pattern="[0-9]*"
           min="0"
