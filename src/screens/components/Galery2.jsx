@@ -1,3 +1,4 @@
+import EncomendarProdutoButton from "./EncomendarProdutoButton";
 export default function Galery({ produtos }) {
   return (
     <section
@@ -74,6 +75,7 @@ export default function Galery({ produtos }) {
                 )}
               </p>
             </div>
+            <EncomendarProdutoButton produto={produto} />
           </div>
         ))}
       </div>
