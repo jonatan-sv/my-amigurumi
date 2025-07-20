@@ -1,6 +1,3 @@
-import SectionTitle from "./SectionTitle";
-import { TbTrashXFilled } from "react-icons/tb";
-
 export default function Galery({ produtos }) {
   return (
     <section
@@ -10,8 +7,6 @@ export default function Galery({ produtos }) {
         scrollMarginTop: "100px",
       }}
     >
- 
-
       <div
         style={{
           display: "flex",
@@ -32,13 +27,10 @@ export default function Galery({ produtos }) {
               background: "#fff",
               scrollSnapAlign: "start",
               position: "relative",
-
               boxShadow: "5px 5px 0 #3d0066",
-
             }}
           >
             <img src={produto.imagem_url} alt={produto.nome} width="150" height="150" />
-
             <div
               style={{
                 display: "flex",
@@ -68,7 +60,18 @@ export default function Galery({ produtos }) {
                   width: "50%",
                 }}
               >
-                {`R$ ${produto.preco}`}
+                {produto.promo && Number(produto.promo) > 0 ? (
+                  <>
+                    <span style={{ textDecoration: 'line-through', color: '#888', marginRight: 8 }}>
+                      R$ {produto.preco}
+                    </span>
+                    <span style={{ color: 'green', fontWeight: 'bold' }}>
+                      R$ {produto.preco - produto.promo}
+                    </span>
+                  </>
+                ) : (
+                  <span>R$ {produto.preco}</span>
+                )}
               </p>
             </div>
           </div>
