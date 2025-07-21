@@ -19,10 +19,19 @@ import VagasBox from "@components/VagasBox";
 import EncomendarButton from "@components/EncomendarButton";
 
 export default function Admin() {
+  const [encomendas, setEncomendas] = useState(0);
   const [produtos, setProdutos] = useState([]);
   const [lojaInfo, setLojaInfo] = useState({});
   const [precoMin, setPrecoMin] = useState("");
   const [precoMax, setPrecoMax] = useState("");
+
+  useEffect(() => {
+    const saved = localStorage.getItem("encomendas");
+    const numero = Number(saved);
+    if (!isNaN(numero)) {
+      setEncomendas(numero);
+    }
+  }, []);
 
   const fetch = async () => {
     const result = await fetchProdutos();
@@ -43,7 +52,7 @@ export default function Admin() {
     fetchLoja();
   }, []);
 
-  const produtosFiltrados = produtos.filter(produto => {
+  const produtosFiltrados = produtos.filter((produto) => {
     const preco = Number(produto.preco);
     const dentroMin = !precoMin || preco >= Number(precoMin);
     const dentroMax = !precoMax || preco <= Number(precoMax);
@@ -59,15 +68,23 @@ export default function Admin() {
         <Hero />
         <Hearts />
 
-        <VagasBox vagas={lojaInfo.vagas} />
+        <VagasBox vagas={encomendas} />
 
-        <div style={{ margin: "30px 0 10px 0", display: "flex", flexDirection: "column", alignItems: "center", gap: "20px" }}>
+        <div
+          style={{
+            margin: "30px 0 10px 0",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "20px",
+          }}
+        >
           <EncomendarButton onClick />
 
-         <SectionTitle>Galeria</SectionTitle>
+          <SectionTitle>Galeria</SectionTitle>
 
           <button
-            onClick={() => setMostrarFiltros(m => !m)}
+            onClick={() => setMostrarFiltros((m) => !m)}
             style={{
               padding: "8px 16px",
               borderRadius: "1rem",
@@ -98,8 +115,13 @@ export default function Admin() {
               <input
                 type="number"
                 value={precoMin}
-                onChange={e => setPrecoMin(e.target.value)}
-                style={{ width: "50px", height: "15px", marginLeft: "5px", fontSize: "15px" }}
+                onChange={(e) => setPrecoMin(e.target.value)}
+                style={{
+                  width: "50px",
+                  height: "15px",
+                  marginLeft: "5px",
+                  fontSize: "15px",
+                }}
                 min={0}
               />
             </label>
@@ -108,8 +130,13 @@ export default function Admin() {
               <input
                 type="number"
                 value={precoMax}
-                onChange={e => setPrecoMax(e.target.value)}
-                style={{ width: "50px", height: "15px", marginLeft: "5px", fontSize: "15px" }}
+                onChange={(e) => setPrecoMax(e.target.value)}
+                style={{
+                  width: "50px",
+                  height: "15px",
+                  marginLeft: "5px",
+                  fontSize: "15px",
+                }}
                 min={0}
               />
             </label>
@@ -118,7 +145,10 @@ export default function Admin() {
 
         <Galery produtos={produtosFiltrados} />
 
-        <div id="agenda" style={{ marginBottom: "10vh", scrollMarginTop: "15vh"}}>
+        <div
+          id="agenda"
+          style={{ marginBottom: "10vh", scrollMarginTop: "15vh" }}
+        >
           <div style={{ marginBottom: "20px" }}>
             <SectionTitle>Agenda de Eventos</SectionTitle>
           </div>

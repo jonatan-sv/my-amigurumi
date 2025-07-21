@@ -6,9 +6,13 @@ import Hero from "@sections/Hero";
 import Footer from "@sections/Footer";
 import AgendaSection from "@sections/Agenda";
 import ContatosSection from "@sections/Contatos";
-import AdicionarSection from "@sections/Adicionar"
-import { fetchProdutos, deleteProduto, updateProduto, addProduto } from "@services/supabaseDB";
-
+import AdicionarSection from "@sections/Adicionar";
+import {
+  fetchProdutos,
+  deleteProduto,
+  updateProduto,
+  addProduto,
+} from "@services/supabaseDB";
 
 export default function Admin() {
   const [produtos, setProdutos] = useState([]);
@@ -34,10 +38,23 @@ export default function Admin() {
     instagram: "https://instagram.com/seuperfil",
   });
 
-  const [encomendas, setEncomendas] = useState(3);
+  const [encomendas, setEncomendas] = useState(() => {
+    const saved = localStorage.getItem("encomendas");
+    const parsed = Number(saved);
+    return !isNaN(parsed) ? parsed : 3;
+  });
+
+  const atualizarEncomendas = (valor) => {
+    const numero = Number(valor);
+    if (!isNaN(numero)) {
+      setEncomendas(numero);
+      localStorage.setItem("encomendas", numero);
+    }
+  };
 
   const adicionarProduto = () => {
-    if (!novoProduto.nome || !novoProduto.preco || !novoProduto.imagem_url) return;
+    if (!novoProduto.nome || !novoProduto.preco || !novoProduto.imagem_url)
+      return;
 
     addProduto(novoProduto);
     setNovoProduto({
@@ -55,18 +72,18 @@ export default function Admin() {
     const novosProdutos = [...produtos];
     novosProdutos[index][chave] = valor;
     setProdutos(novosProdutos);
-  }
+  };
 
   const atualizarProduto = async (index) => {
     await updateProduto(produtos[index].id, produtos[index]);
     fetch();
-  }
+  };
 
   const removerProduto = async (index) => {
     await deleteProduto(produtos[index].id);
     fetch();
   };
-  
+
   useEffect(() => {
     fetch();
   }, []);
@@ -93,7 +110,7 @@ export default function Admin() {
         ></AdicionarSection>
 
         <AgendaSection
-          setEncomendas={setEncomendas}
+          setEncomendas={atualizarEncomendas}
           encomendas={encomendas}
         ></AgendaSection>
 

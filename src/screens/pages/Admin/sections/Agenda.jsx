@@ -32,20 +32,20 @@ export default function Agenda({ setEncomendas, encomendas }) {
           }}
         >
           <AmountButton
-            click={() => setEncomendas((prev) => Math.max(0, prev - 1))}
+            click={() => setEncomendas(Math.max(0, encomendas - 1))}
           >
             -
           </AmountButton>
 
           <input
-            type="text"
-            inputMode="numeric"
-            pattern="[0-9]*"
-            min="0"
-            value={encomendas}
+            type="number"
+            min={0}
+            value={isNaN(encomendas) ? "" : encomendas}
             onChange={(e) => {
               const value = e.target.value;
-              if (!isNaN(value) && Number(value) >= 0) {
+              if (value === "") {
+                setEncomendas(0);
+              } else if (!isNaN(value)) {
                 setEncomendas(Number(value));
               }
             }}
@@ -59,7 +59,7 @@ export default function Agenda({ setEncomendas, encomendas }) {
             }}
           />
 
-          <AmountButton click={() => setEncomendas((prev) => prev + 1)}>
+          <AmountButton click={() => setEncomendas(encomendas + 1)}>
             +
           </AmountButton>
         </div>

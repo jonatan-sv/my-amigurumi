@@ -30,9 +30,9 @@ export default function VagasBox({ vagas }) {
           flexFlow: "column nowrap",
           justifyContent: "center",
           alignItems: "center",
-          width: "80px",
-          height: "80px",
-          fontSize: "2rem",
+          padding: "12px 24px",
+          minWidth: "80px",
+          fontSize: "1.6rem",
           borderRadius: "20px",
           border: "3px solid #3b0056",
           backgroundColor: "#e8d6fa",
@@ -41,7 +41,7 @@ export default function VagasBox({ vagas }) {
           outline: "none",
         }}
       >
-        {vagas}
+        {vagas === 0 ? "Fechado" : vagas}
       </div>
     </div>
   );
