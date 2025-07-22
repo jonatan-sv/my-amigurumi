@@ -32,11 +32,21 @@ export default function Admin() {
     quantidade: 0,
   });
 
-  const [contatos, setContatos] = useState({
-    bluesky: "https://bsky.app/profile/seuperfil.bsky.social",
-    tiktok: "https://www.tiktok.com/@seuperfil",
-    instagram: "https://instagram.com/seuperfil",
+  const [contatos, setContatos] = useState(() => {
+    const saved = localStorage.getItem("contatos");
+    return saved
+      ? JSON.parse(saved)
+      : {
+          bluesky: "https://bsky.app/profile/seuperfil.bsky.social",
+          tiktok: "https://www.tiktok.com/@seuperfil",
+          instagram: "https://instagram.com/seuperfil",
+        };
   });
+
+  const salvarContato = (rede) => {
+    localStorage.setItem("contatos", JSON.stringify(contatos));
+    alert(`Link do ${rede} salvo!`);
+  };
 
   const [encomendas, setEncomendas] = useState(() => {
     const saved = localStorage.getItem("encomendas");
@@ -117,7 +127,8 @@ export default function Admin() {
         <ContatosSection
           setContatos={setContatos}
           contatos={contatos}
-        ></ContatosSection>
+          salvarContato={salvarContato}
+        />
 
         <Footer contatos={contatos}></Footer>
       </div>
