@@ -79,7 +79,7 @@ export default function Admin() {
             gap: "20px",
           }}
         >
-          <EncomendarButton onClick />
+          {encomendas > 0 && <EncomendarButton onClick />}
 
           <SectionTitle>Galeria</SectionTitle>
 
