@@ -22,6 +22,11 @@ export default function Admin() {
   const [encomendas, setEncomendas] = useState(0);
   const [produtos, setProdutos] = useState([]);
   const [lojaInfo, setLojaInfo] = useState({});
+  const [contatosSalvos, setContatosSalvos] = useState(() => {
+    const saved = localStorage.getItem("contatos");
+    return saved ? JSON.parse(saved) : {};
+  });
+
   const [precoMin, setPrecoMin] = useState("");
   const [precoMax, setPrecoMax] = useState("");
 
@@ -155,7 +160,7 @@ export default function Admin() {
           <Calendar url={lojaInfo.agenda} />
         </div>
 
-        <Footer contatos={lojaInfo} />
+        <Footer contatos={contatosSalvos} />
       </div>
     </>
   );
