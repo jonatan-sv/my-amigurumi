@@ -1,10 +1,39 @@
+import { useState } from "react";
 import SectionTitle from "@components/SectionTitle";
+import { supabase } from "@/services/supabaseClient";
 
 export default function AdicionarSection({
   setNovoProduto,
   novoProduto,
   adicionarProduto,
 }) {
+  const [uploading, setUploading] = useState(false);
+
+  async function handleImageUpload(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setUploading(true);
+
+    const fileName = `${Date.now()}-${file.name}`;
+    const { error: uploadError } = await supabase.storage
+      .from("imagens")
+      .upload(fileName, file);
+
+    if (uploadError) {
+      alert("Erro no upload da imagem: " + uploadError.message);
+      setUploading(false);
+      return;
+    }
+
+    const { data: publicUrlData } = supabase.storage
+      .from("imagens")
+      .getPublicUrl(fileName);
+
+    setNovoProduto({ ...novoProduto, imagem_url: publicUrlData.publicUrl });
+    setUploading(false);
+  }
+
   return (
     <section
       id="adicionar"
@@ -43,26 +72,24 @@ export default function AdicionarSection({
           }
           style={{ margin: "5px" }}
         />
-        <input
 
-          type="text"
-          placeholder="URL da imagem"
-          value={novoProduto.imagem_url}
-          onChange={(e) =>
-            setNovoProduto({ ...novoProduto, imagem_url: e.target.value })
-          }
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+          disabled={uploading}
           style={{ margin: "5px" }}
         />
+
         <input
           type="number"
           inputMode="numeric"
           pattern="[0-9]*"
-          min="0"
+          min="1"
           placeholder="Quantidade em estoque"
           value={novoProduto.quantidade}
           onChange={(e) =>
             setNovoProduto({ ...novoProduto, quantidade: e.target.value })
-
           }
           style={{ margin: "5px" }}
         />
