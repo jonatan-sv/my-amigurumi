@@ -74,14 +74,6 @@ export default function AdicionarSection({
         />
 
         <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageUpload}
-          disabled={uploading}
-          style={{ margin: "5px" }}
-        />
-
-        <input
           type="number"
           inputMode="numeric"
           pattern="[0-9]*"
@@ -93,6 +85,41 @@ export default function AdicionarSection({
           }
           style={{ margin: "5px" }}
         />
+
+         <div style={{ margin: "5px", display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <input
+            id="file-upload"
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            disabled={uploading}
+            style={{
+              display: "none",
+            }}
+          />
+          <label
+            htmlFor="file-upload"
+            style={{
+              background: "#e8d6fa",
+              color: "#3d0066",
+              padding: "10px 20px",
+              borderRadius: "1rem",
+              border: "1px solid #3d0066",
+              borderColor: "grey",
+              marginBottom: "5px",
+              // width: "214px",
+              fontSize: "14px",
+              cursor: "pointer",
+            }}
+          >
+            {uploading
+              ? "Enviando imagem..."
+              : novoProduto.imagem_url
+                ? "Imagem selecionada"
+                : "Selecionar imagem..."}
+          </label>
+        </div>
+
         <button
           onClick={adicionarProduto}
           style={{

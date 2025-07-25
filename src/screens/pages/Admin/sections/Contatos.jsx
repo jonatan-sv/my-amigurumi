@@ -8,6 +8,8 @@ export default function Contatos({ setContatos, contatos, salvarContato }) {
     >
       <SectionTitle>Contato</SectionTitle>
 
+      <div style={{ height: "32px" }} />
+
       <div
         style={{
           marginBottom: "20px",
