@@ -34,13 +34,33 @@ export default function AdicionarSection({
     setUploading(false);
   }
 
+  function handleAdicionarClick(e) {
+    const preco = Number(novoProduto.preco);
+    const quantidade = Number(novoProduto.quantidade);
+    if (preco === 0 && quantidade === 0) {
+      alert("Preço e quantidade não podem ser 0.");
+      e.preventDefault();
+      return;
+
+    } else if (preco === 0) {
+      alert("Preço não pode ser 0.");
+      e.preventDefault();
+      return;
+
+    } else if (quantidade === 0) {
+      alert("Quantidade não pode ser 0.");
+      e.preventDefault();
+      return;
+    }
+    adicionarProduto();
+  }
+
   return (
     <section
       id="adicionar"
       style={{ marginTop: "60px", scrollMarginTop: "100px" }}
     >
       <SectionTitle>Adicionar Produtos</SectionTitle>
-
       <div
         style={{
           marginTop: "20px",
@@ -64,7 +84,7 @@ export default function AdicionarSection({
           type="number"
           inputMode="numeric"
           pattern="[0-9]*"
-          min="0"
+          min="1"
           placeholder="Preço"
           value={novoProduto.preco}
           onChange={(e) =>
@@ -121,7 +141,7 @@ export default function AdicionarSection({
         </div>
 
         <button
-          onClick={adicionarProduto}
+          onClick={handleAdicionarClick}
           style={{
             all: "unset",
             background: "var(--dark-purple)",
