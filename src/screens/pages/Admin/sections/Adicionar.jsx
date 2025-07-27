@@ -37,12 +37,15 @@ export default function AdicionarSection({
   function handleAdicionarClick(e) {
     const preco = Number(novoProduto.preco);
     const quantidade = Number(novoProduto.quantidade);
-    if (preco === 0 && quantidade === 0) {
-      alert("Preço e quantidade não podem ser 0.");
+    const nome = novoProduto.nome.trim();
+
+    if (nome === "") {
+      alert("Nome do produto não pode ser vazio."); 
       e.preventDefault();
       return;
+    }
 
-    } else if (preco === 0) {
+    if (preco === 0) {
       alert("Preço não pode ser 0.");
       e.preventDefault();
       return;
