@@ -61,6 +61,11 @@ export async function updateLojaInfo(lojaInfo) {
     .from("infos")
     .update({ ...lojaInfo })
     .eq("id", 1);
-  if (error) return { succes: false };
-  else return { succes: false };
+
+  if (error) {
+    console.error("Erro ao atualizar lojaInfo:", error.message);
+    return { success: false };
+  }
+
+  return { success: true };
 }

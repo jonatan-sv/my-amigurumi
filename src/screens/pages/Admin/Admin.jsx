@@ -41,10 +41,12 @@ export default function Admin() {
   });
 
   const salvarContato = async (rede) => {
-    const atualizado = { [rede]: contatos[rede] };
-    const { succes } = await updateLojaInfo(atualizado);
-    if (succes === false) alert(`Erro ao salvar o ${rede}`);
-    else alert(`${rede} salvo!`);
+    const atualizado = await updateLojaInfo(contatos);
+    if (atualizado.success) {
+      alert(`Link do ${rede} salvo com sucesso!`);
+    } else {
+      alert(`Erro ao salvar o ${rede}`);
+    }
   };
 
   const [encomendas, setEncomendas] = useState(0);
