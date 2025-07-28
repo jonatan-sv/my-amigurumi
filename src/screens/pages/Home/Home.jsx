@@ -19,24 +19,11 @@ import VagasBox from "@components/VagasBox";
 import EncomendarButton from "@components/EncomendarButton";
 
 export default function Admin() {
-  const [encomendas, setEncomendas] = useState(0);
   const [produtos, setProdutos] = useState([]);
   const [lojaInfo, setLojaInfo] = useState({});
-  const [contatosSalvos, setContatosSalvos] = useState(() => {
-    const saved = localStorage.getItem("contatos");
-    return saved ? JSON.parse(saved) : {};
-  });
 
   const [precoMin, setPrecoMin] = useState("");
   const [precoMax, setPrecoMax] = useState("");
-
-  useEffect(() => {
-    const saved = localStorage.getItem("encomendas");
-    const numero = Number(saved);
-    if (!isNaN(numero)) {
-      setEncomendas(numero);
-    }
-  }, []);
 
   const fetch = async () => {
     const result = await fetchProdutos();
@@ -73,7 +60,7 @@ export default function Admin() {
         <Hero />
         <Hearts />
 
-        <VagasBox vagas={encomendas} />
+        <VagasBox vagas={lojaInfo.vagas} />
 
         <div
           style={{
@@ -84,7 +71,7 @@ export default function Admin() {
             gap: "20px",
           }}
         >
-          {encomendas > 0 && <EncomendarButton onClick />}
+          {lojaInfo.vagas > 0 && <EncomendarButton onClick />}
 
           <SectionTitle>Galeria</SectionTitle>
 
@@ -160,7 +147,7 @@ export default function Admin() {
           <Calendar url={lojaInfo.agenda} />
         </div>
 
-        <Footer contatos={contatosSalvos} />
+        <Footer contatos={lojaInfo} />
       </div>
     </>
   );
