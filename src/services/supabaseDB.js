@@ -14,11 +14,30 @@ export async function updateProduto(id, produto) {
   else return { success: true };
 }
 
-export async function deleteProduto(id) {
-  const { error } = await supabase.from("produtos").delete().eq("id", id);
-  if (error) return { success: false };
-  else return { success: true };
+export async function deleteProduto(id, imagemPath) {
+  // 1. Tenta remover a imagem do Supabase Storage
+  const { error: imageError } = await supabase.storage
+    .from("imagens")
+    .remove([imagemPath]);
+
+  if (imageError) {
+    console.error("Erro ao remover imagem:", imageError.message);
+  }
+
+  // 2. Remove o produto da tabela
+  const { error: deleteError } = await supabase
+    .from("produtos")
+    .delete()
+    .eq("id", id);
+
+  if (deleteError) {
+    console.error("Erro ao deletar produto:", deleteError.message);
+    return { success: false };
+  }
+
+  return { success: true };
 }
+
 
 export async function addProduto(produto) {
   const { error } = await supabase.from("produtos").insert({ ...produto });

@@ -1,3 +1,5 @@
+import { fetchLojaInfo, updateLojaInfo } from "@services/supabaseDB";
+
 import { useState, useEffect } from "react";
 import NavBar from "@components/NavBar";
 import Galery from "@components/Galery";
@@ -32,33 +34,26 @@ export default function Admin() {
     quantidade: 0,
   });
 
-  const [contatos, setContatos] = useState(() => {
-    const saved = localStorage.getItem("contatos");
-    return saved
-      ? JSON.parse(saved)
-      : {
-          bluesky: "https://bsky.app/profile/seuperfil.bsky.social",
-          tiktok: "https://www.tiktok.com/@seuperfil",
-          instagram: "https://instagram.com/seuperfil",
-        };
+  const [contatos, setContatos] = useState({
+    bluesky: "",
+    instagram: "",
+    tiktok: "",
   });
 
-  const salvarContato = (rede) => {
-    localStorage.setItem("contatos", JSON.stringify(contatos));
-    alert(`Link do ${rede} salvo!`);
+  const salvarContato = async (rede) => {
+    const atualizado = { [rede]: contatos[rede] };
+    const { succes } = await updateLojaInfo(atualizado);
+    if (succes === false) alert(`Erro ao salvar o ${rede}`);
+    else alert(`${rede} salvo!`);
   };
 
-  const [encomendas, setEncomendas] = useState(() => {
-    const saved = localStorage.getItem("encomendas");
-    const parsed = Number(saved);
-    return !isNaN(parsed) ? parsed : 3;
-  });
+  const [encomendas, setEncomendas] = useState(0);
 
-  const atualizarEncomendas = (valor) => {
+  const atualizarEncomendas = async (valor) => {
     const numero = Number(valor);
     if (!isNaN(numero)) {
       setEncomendas(numero);
-      localStorage.setItem("encomendas", numero);
+      await updateLojaInfo({ vagas: numero });
     }
   };
 
@@ -90,12 +85,35 @@ export default function Admin() {
   };
 
   const removerProduto = async (index) => {
-    await deleteProduto(produtos[index].id);
+    const produto = produtos[index];
+
+    // Extrair o caminho interno da imagem
+    const imagemPath = produto.imagem_url.replace(
+      "https://hkyfwpifisdowjxiogqu.supabase.co/storage/v1/object/public/",
+      ""
+    );
+
+    await deleteProduto(produto.id, imagemPath);
     fetch();
   };
 
   useEffect(() => {
     fetch();
+  }, []);
+
+  useEffect(() => {
+    const carregarLoja = async () => {
+      const result = await fetchLojaInfo();
+      if (result.data) {
+        setContatos({
+          bluesky: result.data.bluesky || "",
+          instagram: result.data.instagram || "",
+          tiktok: result.data.tiktok || "",
+        });
+        setEncomendas(result.data.vagas || 0);
+      }
+    };
+    carregarLoja();
   }, []);
 
   return (
