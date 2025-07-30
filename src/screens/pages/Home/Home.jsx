@@ -44,8 +44,13 @@ export default function Admin() {
     fetchLoja();
   }, []);
 
+  const getPrecoVisivel = (produto) =>
+    produto.promo && Number(produto.promo) > 0
+      ? Number(produto.preco - produto.promo)
+      : Number(produto.preco);
+
   const produtosFiltrados = produtos.filter((produto) => {
-    const preco = Number(produto.preco);
+    const preco = getPrecoVisivel(produto);
     const dentroMin = !precoMin || preco >= Number(precoMin);
     const dentroMax = !precoMax || preco <= Number(precoMax);
     return dentroMin && dentroMax;
