@@ -1,8 +1,18 @@
 import AmountButton from "@components/AmountButton";
 import SectionTitle from "@components/SectionTitle";
 import Calendar from "@components/Calendar";
+import { updateLojaInfo } from "@services/supabaseDB";
 
-export default function Agenda({ setEncomendas, encomendas }) {
+export default function Agenda({ setEncomendas, encomendas, agenda, setAgenda }) {
+  const salvarAgenda = async () => {
+    const result = await updateLojaInfo({ agenda });
+    if (result.success) {
+      alert("Agenda salva com sucesso!");
+    } else {
+      alert("Erro ao salvar a agenda.");
+    }
+  };
+
   return (
     <section
       id="agenda"
@@ -73,9 +83,42 @@ export default function Agenda({ setEncomendas, encomendas }) {
         >
           {encomendas === 0 ? "Encomendas fechadas" : "Encomendas abertas"}
         </p>
+
+        {/* Campo de agenda */}
+        <input
+          type="text"
+          placeholder="Link do calendário (agenda)"
+          value={agenda}
+          onChange={(e) => setAgenda(e.target.value)}
+          style={{
+            width: "100%",
+            maxWidth: "400px",
+            marginTop: "20px",
+            padding: "10px",
+            borderRadius: "8px",
+            border: "1px solid #ccc",
+            textAlign: "center",
+          }}
+        />
+
+        <button
+          onClick={salvarAgenda}
+          style={{
+            marginTop: "10px",
+            backgroundColor: "#a56be6",
+            color: "white",
+            border: "none",
+            padding: "8px 16px",
+            borderRadius: "10px",
+            cursor: "pointer",
+            fontWeight: "bold",
+          }}
+        >
+          Salvar Agenda
+        </button>
       </div>
 
-      <Calendar></Calendar>
+      <Calendar url={agenda} />
     </section>
   );
 }

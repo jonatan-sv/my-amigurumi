@@ -41,7 +41,7 @@ export default function Admin() {
   });
 
   const salvarContato = async (rede) => {
-    const atualizado = await updateLojaInfo(contatos);
+    const atualizado = await updateLojaInfo({ ...contatos, agenda });
     if (atualizado.success) {
       alert(`Link do ${rede} salvo com sucesso!`);
     } else {
@@ -50,12 +50,13 @@ export default function Admin() {
   };
 
   const [encomendas, setEncomendas] = useState(0);
+  const [agenda, setAgenda] = useState("");
 
   const atualizarEncomendas = async (valor) => {
     const numero = Number(valor);
     if (!isNaN(numero)) {
       setEncomendas(numero);
-      await updateLojaInfo({ vagas: numero });
+      await updateLojaInfo({ vagas: numero, agenda });
     }
   };
 
@@ -73,7 +74,7 @@ export default function Admin() {
       quantidade: 0,
     });
     fetch();
-  }; // Atualmente ao adicionar um produto com url de imagem ele não atualiza imediatamente, ver como resolver depois
+  };
 
   const handleChangeProduto = (index, chave, valor) => {
     const novosProdutos = [...produtos];
@@ -88,13 +89,10 @@ export default function Admin() {
 
   const removerProduto = async (index) => {
     const produto = produtos[index];
-
-    // Extrair o caminho interno da imagem
     const imagemPath = produto.imagem_url.replace(
       "https://hkyfwpifisdowjxiogqu.supabase.co/storage/v1/object/public/",
       ""
     );
-
     await deleteProduto(produto.id, imagemPath);
     fetch();
   };
@@ -113,6 +111,7 @@ export default function Admin() {
           tiktok: result.data.tiktok || "",
         });
         setEncomendas(result.data.vagas || 0);
+        setAgenda(result.data.agenda || "");
       }
     };
     carregarLoja();
@@ -123,26 +122,27 @@ export default function Admin() {
       <div style={{ textAlign: "center" }}>
         <NavBar />
         <Hero />
-
-        <Hearts></Hearts>
+        <Hearts />
 
         <Galery
           produtos={produtos}
           removerProduto={removerProduto}
           handleChangeProduto={handleChangeProduto}
           updateProduto={atualizarProduto}
-        ></Galery>
+        />
 
         <AdicionarSection
           setNovoProduto={setNovoProduto}
           novoProduto={novoProduto}
           adicionarProduto={adicionarProduto}
-        ></AdicionarSection>
+        />
 
         <AgendaSection
           setEncomendas={atualizarEncomendas}
           encomendas={encomendas}
-        ></AgendaSection>
+          agenda={agenda}
+          setAgenda={setAgenda}
+        />
 
         <ContatosSection
           setContatos={setContatos}
@@ -150,7 +150,7 @@ export default function Admin() {
           salvarContato={salvarContato}
         />
 
-        <Footer contatos={contatos}></Footer>
+        <Footer contatos={contatos} />
       </div>
     </>
   );

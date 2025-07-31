@@ -27,13 +27,6 @@ export default function Calendar() {
           alignItems: "center",
         }}
       >
-        <input
-          type="text"
-          name="link"
-          id="link"
-          value={calendarLink}
-          onChange={(e) => setCalendarLink(e.value)}
-        />
         <div style={container}>
           <iframe
             src={calendarLink}
